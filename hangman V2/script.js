@@ -3,20 +3,33 @@ const numThemes = 6;
 
 //Generating theme buttons
 
-
-
-
-
-
 const themes = [
     ["Theme 1", "Theme 2", "Theme 3", "Theme 4", "Theme 5", "Theme 6"],
     [1, 2, 3, 4, 5, 6]
 ];
 
+const themeWords = [
+    ["Banana", "Dragon Fruit", "Strawberry"],
+    [],
+    [],
+    [],
+    [],
+    [],
+]
+    
+
+
 $(document).ready(function(){
     //jquery will monitor if a theme button has been clicked
     $(".themeButton").click(function () {
         //getting the value of the clicked theme button
+        selectedTheme = $(this).val();
+        console.log(selectedTheme);
+    });
+
+    //jquery will monitor if a alphabet button has been clicked
+    $(".alphabetLetter").click(function () {
+        //getting the value of the clicked alphabet button
         selectedTheme = $(this).val();
         console.log(selectedTheme);
     });
@@ -57,6 +70,11 @@ function generateAlphabetButtons() {
         const element = document.getElementById("alphabetItems");
         element.appendChild(alphabetButton);
     }
+}
+
+function playGame()
+{
+    console.log("Playing game");
 }
 
 
