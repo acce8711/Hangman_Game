@@ -1,5 +1,6 @@
 //Global variables
 const numThemes = 6;
+var chosenTheme;
 
 //Generating theme buttons
 
@@ -20,11 +21,16 @@ const themeWords = [
 
 
 $(document).ready(function(){
+
+    //displaying the section that prompt the user to play
+    startGame();
+
     //jquery will monitor if a theme button has been clicked
     $(".themeButton").click(function () {
         //getting the value of the clicked theme button
         selectedTheme = $(this).val();
-        console.log(selectedTheme);
+        chosenTheme = selectedTheme;
+        afterThemePick();
     });
 
     //jquery will monitor if a alphabet button has been clicked
@@ -72,10 +78,38 @@ function generateAlphabetButtons() {
     }
 }
 
+function startGame()
+{
+    hideContainers();
+    showContainer(".homeContainer");
+}
+
 function playGame()
 {
     console.log("Playing game");
+    hideContainers();
+    showContainer(".themeContainer");
 }
 
+function afterThemePick()
+{
+    console.log(chosenTheme);
+    hideContainers();
+    showContainer(".playContainer");
+}
 
+//function hides all of the containers
+function hideContainers()
+{
+    containers = document.getElementsByClassName("container");
+    for (let i = 0; i < containers.length; i++) {
+        containers[i].style.display = "none";
+    }
+}
+
+//function displays the chosen container
+function showContainer(className)
+{
+    document.querySelector(className).style.display = "flex";
+}
 
