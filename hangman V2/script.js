@@ -5,12 +5,12 @@ var chosenTheme;
 //Generating theme buttons
 
 const themes = [
-    ["Theme 1", "Theme 2", "Theme 3", "Theme 4", "Theme 5", "Theme 6"],
+    ["School Subjects", "Emotions", "Theme 3", "Theme 4", "Theme 5", "Theme 6"],
     [1, 2, 3, 4, 5, 6]
 ];
 
 const themeWords = [
-    ["Banana", "Dragon Fruit", "Strawberry"],
+    ["Mathematics", "English", "Science", "Art", "Physical Education", "Algebra", "Biology", "Calculus", "Chemistry", "Film", "Computer Science"],
     [],
     [],
     [],
@@ -18,19 +18,24 @@ const themeWords = [
     [],
 ]
     
-
-
 $(document).ready(function(){
 
     //displaying the section that prompt the user to play
     startGame();
+
+    //checking if the music button has been clicked
+    $(".musicIcon").click(function () {
+        $(this).toggleClass("inactive");
+        var active = ($(this).hasClass("inactive")) ? false : true;
+        toggleMusic(active);
+    })
 
     //jquery will monitor if a theme button has been clicked
     $(".themeButton").click(function () {
         //getting the value of the clicked theme button
         selectedTheme = $(this).val();
         chosenTheme = selectedTheme;
-        afterThemePick();
+        playGame();
     });
 
     //jquery will monitor if a alphabet button has been clicked
@@ -39,6 +44,7 @@ $(document).ready(function(){
         selectedTheme = $(this).val();
         console.log(selectedTheme);
     });
+
 })
 
 generateThemeButtons();
@@ -82,20 +88,28 @@ function startGame()
 {
     hideContainers();
     showContainer(".homeContainer");
+    //playing audio
+    //playMainMusic(true);
 }
 
-function playGame()
+function pickTheme()
 {
     console.log("Playing game");
     hideContainers();
     showContainer(".themeContainer");
 }
 
-function afterThemePick()
+function playGame()
 {
     console.log(chosenTheme);
     hideContainers();
     showContainer(".playContainer");
+}
+
+function gameOver()
+{
+    hideContainers();
+    showContainer(".gameOverContainer");
 }
 
 //function hides all of the containers
@@ -111,5 +125,20 @@ function hideContainers()
 function showContainer(className)
 {
     document.querySelector(className).style.display = "flex";
+}
+
+//function plays or pauses the main music
+
+function toggleMusic(active)
+{
+    if (active)
+    {
+        document.getElementById("upbeatMusic").play();
+    }
+    else 
+    {
+        document.getElementById("upbeatMusic").pause();
+
+    }
 }
 

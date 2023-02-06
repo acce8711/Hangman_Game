@@ -13,12 +13,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <audio id="upbeatMusic" loop="true" autoplay="true">
+        <source src="audioRecources/placeholder.mp3" type="audio/mpeg">
+    </audio>
+
     <!--section that prompts the player to play-->
     <section class="container homeContainer">
         <div class="containerItems">
+            <div class="icons">
+                <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
+            </div>
             <div class="icons"></div>
             <h1>Title</h1>
-            <button id="play" onclick="playGame()">Play</button>
+            <button id="play" onclick="pickTheme()">Play</button>
             <h2 id="tagLine">Help Bob write his essay!</h2>
         </div>
     </section>
@@ -28,7 +36,7 @@
         <div class="containerItems">
             <div class="icons">
                 <button class="icon" onclick="startGame()"><img src="" alt="icon of a house symbol"></button>
-                <button class="icon"><img src="" alt="icon of a music symbol"></button>
+                <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
             </div>
             <h1></h1>
             <div class="themeBox" id="themeBox">
@@ -42,8 +50,8 @@
         <div class="containerItems">
             <div class="icons">
                 <button class="icon" onclick="startGame()"><img src="" alt="icon of a house symbol"></button>
-                <button class="icon"><img src="" alt="icon of a music symbol"></button>
-                <button class="icon"><img src="" alt="icon of a magnifying glass symbol"></button>
+                <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
+                <button class="icon "><img src="" alt="icon of a magnifying glass symbol"></button>
             </div>
             <div class="wordText">
                 <div class="letters">
