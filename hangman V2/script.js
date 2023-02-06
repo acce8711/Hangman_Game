@@ -1,16 +1,20 @@
 //Global variables
-const numThemes = 6;
-var chosenTheme;
+const numThemes = 6;        //number of themes
+var chosenTheme;            //selected theme
+var word;                   //selected word
+var hearts;                 //number of hearts
+var spaces;                 //number of spaces in a word
+const completedWords = [];  //storing the words that have already been done by user
 
 //Generating theme buttons
 
 const themes = [
     ["School Subjects", "Emotions", "Theme 3", "Theme 4", "Theme 5", "Theme 6"],
-    [1, 2, 3, 4, 5, 6]
+    [0, 1, 2, 3, 4, 5]
 ];
 
 const themeWords = [
-    ["Mathematics", "English", "Science", "Art", "Physical Education", "Algebra", "Biology", "Calculus", "Chemistry", "Film", "Computer Science"],
+    ["Mathematics", "English", "Science", "Art", "Physical-Education", "Algebra", "Biology", "Calculus", "Chemistry", "Film", "Computer-Science"],
     [],
     [],
     [],
@@ -104,6 +108,23 @@ function playGame()
     console.log(chosenTheme);
     hideContainers();
     showContainer(".playContainer");
+
+    
+    var positionChosen = false;
+    while (!positionChosen)
+    {
+        var wordPosition = Math.floor(Math.random() * 10)
+        if (!completedWords.includes(wordPosition))
+        {
+            positionChosen = true;
+        }
+    }
+    
+    //selecting a random word from the selected theme category
+    word = themeWords[chosenTheme][wordPosition];
+    completedWords.push(wordPosition);
+    console.log(completedWords);
+
 }
 
 function gameOver()
