@@ -52,6 +52,7 @@ $(document).ready(function(){
         var selectedLetter = $(this).val();
         console.log(selectedLetter);
         guessLetter(selectedLetter);
+        checkMaxGuesses();
         guessedWord();
     });
 
@@ -182,12 +183,27 @@ function guessLetter(letter) {
     {
         console.log("I ", letter, " am included !");
         guessedLetters.push(letter);
-        document.getElementById(letter).disabled = true;
     }
     if(!answer.toUpperCase().includes(letter))
     {
         incorrectGuesses++;
         console.log(incorrectGuesses);
-        document.getElementById(letter).disabled = true;
+        removeHeart();
+    }
+    //disabling the button that was just clicked
+    document.getElementById(letter).disabled = true;
+}
+
+function removeHeart() 
+{
+    console.log("hello noob");
+    document.getElementById("heart"+incorrectGuesses).src = "visualRecources/unfilled.png";
+}
+
+function checkMaxGuesses()
+{
+    if (incorrectGuesses >= 5)
+    {
+        gameOver();
     }
 }
