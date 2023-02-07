@@ -6,6 +6,8 @@ var hearts = 5;                 //number of hearts
 var spaces;                 //number of spaces in a word
 var guessedLetters = [];  //storing the words that have already been done by user
 var incorrectGuesses = 0;
+var uniqueLettersWord; //number of unique letters in word to guess
+var uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
 var answer = "banana";
 var wordStatus = null;
 
@@ -30,6 +32,12 @@ $(document).ready(function(){
 
     //displaying the section that prompt the user to play
     startGame();
+
+    // $(document).click(function(){
+    //     console.log("rubber duck");
+    // const myModal = new bootstrap.Modal(document.getElementById('winModal'));
+    // myModal.hide();
+    // })
 
     //checking if the music button has been clicked
     $(".musicIcon").click(function () {
@@ -137,11 +145,26 @@ function playGame()
 
 }
 
+//function to show game over page
 function gameOver()
 {
     hideContainers();
     showContainer(".gameOverContainer");
+    //button in game over page to reset variables and game state
 }
+
+//function to show win state popup
+function winState()
+{
+    showContainer(".winStateContainer");
+    //show modal
+    console.log("Emma is terrible :D");
+    const myModal = new bootstrap.Modal(document.getElementById('winModal'));
+    myModal.show();
+    //add document.addEventListener to click anywhere to close modal and restart game
+}
+
+
 
 //function hides all of the containers
 function hideContainers()
@@ -169,7 +192,7 @@ function toggleMusic(active)
     else 
     {
         document.getElementById("upbeatMusic").pause();
-
+        winState();
     }
 }
 
@@ -183,6 +206,12 @@ function guessLetter(letter) {
     {
         console.log("I ", letter, " am included !");
         guessedLetters.push(letter);
+        //get word, create variable to store number of unique letters
+        //create variable for unique letter counter
+        //if letter is guessed correctly, unique letter counter is incremented
+        //if number of unique letters guessed correctly = number of unique letters in word
+        //call winState()
+        //winState() shows modal popup with message and "click anywhere to replay"
     }
     if(!answer.toUpperCase().includes(letter))
     {
