@@ -51,24 +51,17 @@ var category;
     console.log(numUniqueLetters);
    });
 
-    // console.log(dictionaryResult);
-    // console.log(word);
-    // console.log(numLetters);
-    // console.log(category);
-
-//not functional :')
+//function to count the number of unique letters in a word
 function countUniqueLetters(str){
-    //for loop to loop through for number of letters in the word
-    //count number of unique letters
-    let unique = "";
+    let unique = ""; //create new string to store unique characters in the word
     for(let i = 0; i < str.length; i++){
         if(unique.includes(word[i])===false){
-            unique += str[i];
+            unique += str[i]; //add unique letters to the new string
         }
     }
     console.log("The unique string is " + unique);
-    let countedUnique = unique.length;
+    let countedUnique = unique.length; //count the string length of the new string
     console.log("The number of unique letters is " + countedUnique);
-    return countedUnique;
+    return countedUnique; //return the number of unique characters in the word
 }
 
