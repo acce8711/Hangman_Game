@@ -10,6 +10,8 @@ var uniqueLettersWord; //number of unique letters in word to guess
 var uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
 var answer = "banana";
 var wordStatus = null;
+var numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
+var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
 
 
 //Generating theme buttons
@@ -60,7 +62,6 @@ $(document).ready(function(){
         var selectedLetter = $(this).val();
         console.log(selectedLetter);
         guessLetter(selectedLetter);
-        checkMaxGuesses();
         guessedWord();
     });
 
@@ -103,6 +104,10 @@ function generateAlphabetButtons() {
     }
 }
 
+function generateHearts() {
+
+}
+
 function startGame()
 {
     hideContainers();
@@ -120,6 +125,30 @@ function pickTheme()
 
 function playGame()
 {
+    //resetting all variables
+    guessedLetters = [];  //storing the words that have already been done by user
+    incorrectGuesses = 0;
+    uniqueLettersWord; //number of unique letters in word to guess
+    uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
+    wordStatus = null;
+    numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
+    uniqueLetterCounter = 0; 
+
+    //resetting all alphabet buttons
+    var alphabetButtons = document.getElementsByClassName("alphabetLetter")
+    for (let i = 0; i < alphabetButtons.length; i++)
+    {
+        alphabetButtons[i].disabled = false;
+    }
+
+    //resetting all of the hearts
+    var hearts = document.getElementsByClassName("heart");
+    console.log(hearts);
+    for (let i = 0; i < hearts.length; i++)
+    {
+        hearts[i].src = "visualRecources/filledIn.png";
+    }
+
     console.log(chosenTheme);
     hideContainers();
     showContainer(".playContainer");
@@ -206,6 +235,12 @@ function guessLetter(letter) {
     {
         console.log("I ", letter, " am included !");
         guessedLetters.push(letter);
+        uniqueLetterCounter++;
+        console.log(uniqueLetterCounter);
+        if (uniqueLetterCounter >= numUniqueLetters)
+        {
+            winState();
+        }
         //get word, create variable to store number of unique letters
         //create variable for unique letter counter
         //if letter is guessed correctly, unique letter counter is incremented
@@ -218,6 +253,7 @@ function guessLetter(letter) {
         incorrectGuesses++;
         console.log(incorrectGuesses);
         removeHeart();
+        checkMaxGuesses();
     }
     //disabling the button that was just clicked
     document.getElementById(letter).disabled = true;
@@ -226,13 +262,19 @@ function guessLetter(letter) {
 function removeHeart() 
 {
     console.log("hello noob");
-    document.getElementById("heart"+incorrectGuesses).src = "visualRecources/unfilled.png";
+    document.getElementById("heart" + incorrectGuesses).src = "visualRecources/unfilled.png";
 }
 
 function checkMaxGuesses()
 {
-    if (incorrectGuesses >= 5)
+    if (incorrectGuesses == 5)
     {
         gameOver();
     }
+}
+
+function winState()
+{
+    console.log("you win!")
+    startGame();
 }
