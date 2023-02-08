@@ -2,14 +2,15 @@
 const url = `https://www.wordgamedb.com/api/v1/words/random`; //API to get words, category, and letter count
 const numThemes = 6;        //number of themes
 var chosenTheme;            //selected theme
-var word;                   //selected word
+var category;              //category from API call
+var word;                   //selected word from API call
 var hearts = 5;                 //number of hearts
 var spaces;                 //number of spaces in a word
 var guessedLetters = [];  //storing the words that have already been done by user
 var incorrectGuesses = 0;
 var uniqueLettersWord; //number of unique letters in word to guess
 var uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
-var answer = "banana";
+var answer = "banana"; //word used for testing
 var wordStatus = null;
 var numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
 var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
@@ -133,7 +134,7 @@ function playGame()
     uniqueLettersWord; //number of unique letters in word to guess
     uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
     wordStatus = null;
-    numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
+    //numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
     uniqueLetterCounter = 0;     
     
     fetch(url)
@@ -192,9 +193,6 @@ function playGame()
         */
         guessedWord();
     });
-
-
-
 }
 
 //function to show game over page
