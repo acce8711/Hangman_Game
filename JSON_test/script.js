@@ -1,11 +1,3 @@
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '972210ba26msha5a5c1a70185565p1617a2jsn1486e8551de0',
-// 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-// 	}
-// };
-
 // fetch('https://random-words5.p.rapidapi.com/getRandom', options)
 // 	.then(response => response.json())
 // 	.then(response => console.log(response))
