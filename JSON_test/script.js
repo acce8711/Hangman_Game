@@ -50,9 +50,19 @@ var category;
     console.log(category);
    });
 
-numUniqueLetters = countUniqueLetters();
-
-function countUniqueLetters(){
+//not functional :')
+function countUniqueLetters(str){
     //for loop to loop through for number of letters in the word
     //count number of unique letters
+    let uniqueChar = "";
+    let countedUnique = 0;
+    for(let i = 0; i < numLetters; i++){
+        if(uniqueChar.includes(word[i])===false){
+            numUniqueLetters++;
+            console.log("Unique letter count increased");
+        }
+    }
 }
+
+countUniqueLetters(word);
+console.log(numUniqueLetters);
