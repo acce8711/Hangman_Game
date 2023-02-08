@@ -38,31 +38,37 @@ var category;
    fetch(url2)
   .then(res => res.json())
   .then(data => {
-    dictionaryResult = data;
     numLetters = data.numLetters;
     word = data.word;
     category = data.category;
    })
   .then(() => {
-    console.log(dictionaryResult);
     console.log(word);
-    console.log(numLetters);
     console.log(category);
+   })
+   .then(()=>{
+    numUniqueLetters = countUniqueLetters(word);
+    console.log(numUniqueLetters);
    });
+
+    // console.log(dictionaryResult);
+    // console.log(word);
+    // console.log(numLetters);
+    // console.log(category);
 
 //not functional :')
 function countUniqueLetters(str){
     //for loop to loop through for number of letters in the word
     //count number of unique letters
-    let uniqueChar = "";
-    let countedUnique = 0;
-    for(let i = 0; i < numLetters; i++){
-        if(uniqueChar.includes(word[i])===false){
-            numUniqueLetters++;
-            console.log("Unique letter count increased");
+    let unique = "";
+    for(let i = 0; i < str.length; i++){
+        if(unique.includes(word[i])===false){
+            unique += str[i];
         }
     }
+    console.log("The unique string is " + unique);
+    let countedUnique = unique.length;
+    console.log("The number of unique letters is " + countedUnique);
+    return countedUnique;
 }
 
-countUniqueLetters(word);
-console.log(numUniqueLetters);
