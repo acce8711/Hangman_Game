@@ -44,6 +44,7 @@ var category;
    })
   .then(() => {
     console.log(word);
+    console.log("The number of letters in " + word + " is " + numLetters);
     console.log(category);
    })
    .then(()=>{
