@@ -1,4 +1,5 @@
 //Global variables
+const url = `https://www.wordgamedb.com/api/v1/words/random`; //API to get words, category, and letter count
 const numThemes = 6;        //number of themes
 var chosenTheme;            //selected theme
 var word;                   //selected word
@@ -12,6 +13,7 @@ var answer = "banana";
 var wordStatus = null;
 var numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
 var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
+
 
 
 //Generating theme buttons
@@ -132,45 +134,66 @@ function playGame()
     uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
     wordStatus = null;
     numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
-    uniqueLetterCounter = 0; 
-
-    //resetting all alphabet buttons
-    var alphabetButtons = document.getElementsByClassName("alphabetLetter")
-    for (let i = 0; i < alphabetButtons.length; i++)
-    {
-        alphabetButtons[i].disabled = false;
-    }
-
-    //resetting all of the hearts
-    var hearts = document.getElementsByClassName("heart");
-    console.log(hearts);
-    for (let i = 0; i < hearts.length; i++)
-    {
-        hearts[i].src = "visualRecources/filledIn.png";
-    }
-
-    console.log(chosenTheme);
-    hideContainers();
-    showContainer(".playContainer");
-
-    /*
-    var positionChosen = false;
-    while (!positionChosen)
-    {
-        var wordPosition = Math.floor(Math.random() * 10)
-        if (!completedWords.includes(wordPosition))
+    uniqueLetterCounter = 0;     
+    
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        numLetters = data.numLetters;
+        word = data.word;
+        category = data.category;
+        })
+    .then(() => {
+        console.log(word);
+        console.log("The number of letters in " + word + " is " + numLetters);
+        console.log(category);
+        })
+    .then(()=>{
+        numUniqueLetters = countUniqueLetters(word);
+        console.log(numUniqueLetters);
+        })
+   .then(()=>{
+        //to include code for what happens after JSON response
+        //resetting all alphabet buttons
+        var alphabetButtons = document.getElementsByClassName("alphabetLetter")
+        for (let i = 0; i < alphabetButtons.length; i++)
         {
-            positionChosen = true;
+            alphabetButtons[i].disabled = false;
         }
-    }
-    */
-    //selecting a random word from the selected theme category
-    /*
-    word = themeWords[chosenTheme][wordPosition];
-    completedWords.push(wordPosition);
-    console.log(completedWords);
-    */
-    guessedWord();
+
+        //resetting all of the hearts
+        var hearts = document.getElementsByClassName("heart");
+        console.log(hearts);
+        for (let i = 0; i < hearts.length; i++)
+        {
+            hearts[i].src = "visualRecources/filledIn.png";
+        }
+
+        console.log(chosenTheme);
+        hideContainers();
+        showContainer(".playContainer");
+
+        /*
+        var positionChosen = false;
+        while (!positionChosen)
+        {
+            var wordPosition = Math.floor(Math.random() * 10)
+            if (!completedWords.includes(wordPosition))
+            {
+                positionChosen = true;
+            }
+        }
+        */
+        //selecting a random word from the selected theme category
+        /*
+        word = themeWords[chosenTheme][wordPosition];
+        completedWords.push(wordPosition);
+        console.log(completedWords);
+        */
+        guessedWord();
+    });
+
+
 
 }
 
@@ -226,12 +249,12 @@ function toggleMusic(active)
 }
 
 function guessedWord() {
-    wordStatus = answer.toUpperCase().split('').map(letter => (guessedLetters.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+    wordStatus = word.toUpperCase().split('').map(letter => (guessedLetters.indexOf(letter) >= 0 ? letter : " _ ")).join('');
     document.getElementById("word").innerHTML = wordStatus;
 }
 
 function guessLetter(letter) {
-    if (answer.toUpperCase().includes(letter) && !guessedLetters.includes(letter))
+    if (word.toUpperCase().includes(letter) && !guessedLetters.includes(letter))
     {
         console.log("I ", letter, " am included !");
         guessedLetters.push(letter);
@@ -248,7 +271,7 @@ function guessLetter(letter) {
         //call winState()
         //winState() shows modal popup with message and "click anywhere to replay"
     }
-    if(!answer.toUpperCase().includes(letter))
+    if(!word.toUpperCase().includes(letter))
     {
         incorrectGuesses++;
         console.log(incorrectGuesses);
@@ -277,4 +300,18 @@ function winState()
 {
     console.log("you win!")
     startGame();
+}
+
+//function to count the number of unique letters in a word
+function countUniqueLetters(str){
+    let unique = ""; //create new string to store unique characters in the word
+    for(let i = 0; i < str.length; i++){
+        if(unique.includes(word[i])===false){
+            unique += str[i]; //add unique letters to the new string
+        }
+    }
+    console.log("The unique string is " + unique);
+    let countedUnique = unique.length; //count the string length of the new string
+    console.log("The number of unique letters is " + countedUnique);
+    return countedUnique; //return the number of unique characters in the word
 }
