@@ -145,6 +145,8 @@ function playGame()
         numLetters = data.numLetters;
         word = data.word;
         category = data.category;
+        let hint = category.toUpperCase();
+        $("#hint").html(hint);
         })
     .then(() => {
         console.log(word);
