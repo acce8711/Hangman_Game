@@ -57,6 +57,8 @@ $(document).ready(function(){
     $(".hintIcon").click(function () {
         $('#hintModal').modal('toggle');
         console.log("Hint modal activated");
+        console.log(category);
+        $("#categoryHint").html(category);
     });
 
     //jquery will monitor if a alphabet button has been clicked
@@ -199,6 +201,7 @@ function playGame()
 function gameOver()
 {
     hideContainers();
+    $("#wordReveal").html(word);
     showContainer(".gameOverContainer");
     //button in game over page to reset variables and game state
 }
