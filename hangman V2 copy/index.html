@@ -51,7 +51,7 @@
             <div class="icons">
                 <button class="icon" onclick="startGame()"><img src="" alt="icon of a house symbol"></button>
                 <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
-                <button class="icon "><img src="" alt="icon of a magnifying glass symbol"></button>
+                <button class="icon hintIcon"><img src="" alt="icon of a magnifying glass symbol"></button>
             </div>
             <div class="wordText">
                 <p id="word">The guessed word goes here</p>
@@ -68,7 +68,6 @@
                 <span><img src="visualRecources/filledIn.png" id="heart4" class="heart" ></span>
                 <span><img src="visualRecources/filledIn.png" id="heart5" class="heart" ></span>
             </div>
-            <div class="hint"></div><!--modal popup bootstrap-->
         </div>
     </section>
 
@@ -80,30 +79,30 @@
             </div>
         </div>
     </section>
-    <section class="container winStateContainer">
-        <div class="containerItems">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
-            </button>
-            <!--Modal-->
-            <div class="modal fade" id="winModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!--hint modal popup bootstrap-->
+           <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h4>SOMETHING ABOUT...
+                                <span id="categoryHint">
+                                    <!--category given from API-->
+                                </span>
+                            </h4>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <h2>You guessed correctly!</h2>
-                        <h4>Click anywhere to play again</h4>
-                    </div>
-                  </div>
                 </div>
-              </div>
-        </div>
-    </section>
-
-    
+            </div>
+    <!--win Modal-->
+           <div class="modal fade" id="winModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h2>You guessed correctly!</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
     <!--linking the jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <!--linking the Bootstrap js-->

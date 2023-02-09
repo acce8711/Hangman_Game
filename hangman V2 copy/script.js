@@ -1,6 +1,7 @@
 //Global variables
 const url = `https://www.wordgamedb.com/api/v1/words/random`; //API to get words, category, and letter count
 const numThemes = 6;        //number of themes
+// const winModal = document.getElementById("#winModal"); //winModal
 var chosenTheme;            //selected theme
 var category;              //category from API call
 var word;                   //selected word from API call
@@ -14,7 +15,6 @@ var answer = "banana"; //word used for testing
 var wordStatus = null;
 var numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
 var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
-
 
 
 //Generating theme buttons
@@ -38,12 +38,6 @@ $(document).ready(function(){
     //displaying the section that prompt the user to play
     startGame();
 
-    // $(document).click(function(){
-    //     console.log("rubber duck");
-    // const myModal = new bootstrap.Modal(document.getElementById('winModal'));
-    // myModal.hide();
-    // })
-
     //checking if the music button has been clicked
     $(".musicIcon").click(function () {
         $(this).toggleClass("inactive");
@@ -57,6 +51,12 @@ $(document).ready(function(){
         var selectedTheme = $(this).val();
         chosenTheme = selectedTheme;
         playGame();
+    });
+
+    //jquery will monitor if a theme button has been clicked
+    $(".hintIcon").click(function () {
+        $('#hintModal').modal('toggle');
+        console.log("Hint modal activated");
     });
 
     //jquery will monitor if a alphabet button has been clicked
@@ -136,7 +136,7 @@ function playGame()
     wordStatus = null;
     //numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
     uniqueLetterCounter = 0;     
-    
+
     fetch(url)
     .then(res => res.json())
     .then(data => {
@@ -208,9 +208,7 @@ function winState()
 {
     showContainer(".winStateContainer");
     //show modal
-    console.log("Emma is terrible :D");
-    const myModal = new bootstrap.Modal(document.getElementById('winModal'));
-    myModal.show();
+    $(winModal).modal('show');
     //add document.addEventListener to click anywhere to close modal and restart game
 }
 
@@ -296,8 +294,11 @@ function checkMaxGuesses()
 
 function winState()
 {
-    console.log("you win!")
-    startGame();
+    console.log("you win!");
+    $('#winModal').modal('show');
+    $('#winModal').on('hidden.bs.modal', function(){
+        startGame();
+    })
 }
 
 //function to count the number of unique letters in a word
@@ -313,3 +314,9 @@ function countUniqueLetters(str){
     console.log("The number of unique letters is " + countedUnique);
     return countedUnique; //return the number of unique characters in the word
 }
+
+    $(document).click(function(){
+        console.log("rubber duck");
+        //const myModal = new bootstrap.Modal(document.getElementById('winModal'));
+        //$('.modal').modal('show');
+    })
