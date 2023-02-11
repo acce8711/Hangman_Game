@@ -22,7 +22,7 @@ var musicToggleSelection = true;
 
 const themes = [
     ["Idioms", "Phobias", "Latin Names", "Plants", "Geography", "Random"],
-    [0, 1, 2, 3, 4, 5, 6]
+    [0, 1, 2, 3, 4, 5]
 ];
 
 // const themeWords = [
