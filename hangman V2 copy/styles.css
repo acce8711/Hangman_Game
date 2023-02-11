@@ -45,18 +45,17 @@
 .homeContainer {
     background: url(visualRecources/homeScreen2.jpg);
     background-size: cover;
+    position: relative;
 }
 
 .containerItems {
     width: 95%;
     height: 90%;
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
 }
 
 .icons {
-    border: 2px solid rgb(23, 78, 12);
     display: flex;
     height: 50px;
 }
@@ -78,17 +77,18 @@
 }
 
 #play {
-    margin-top: 250px;
+    position: absolute;
+    top: 320px;
     width: fit-content;
-    margin-left: 600px;
+    right: 200px;
     float: right;
     font-size: 64px;
     background: transparent;
-    border: 2px solid black;
+    border: none;
     color: rgb(230, 230, 230);
 }
 
-#play:after {
+#play:after, #playAgain:after {
     content: '';
     height: 10px;
     width: 0%;
@@ -99,7 +99,7 @@
     transition: .2s ease-in-out;
 }
 
-#play:hover::after {
+#play:hover::after, #playAgain:hover::after {
     content:"";
     height: 10px;
     width: 100%;
@@ -109,6 +109,13 @@
     display: block;
 }
 
+#tagLine {
+    color: #788d7c;
+    position: absolute;
+    bottom: 20px;
+    right: 100px;
+}
+
 .playContainer {
     background: url(visualRecources/playPage.jpg);
     background-size: cover;
@@ -116,7 +123,7 @@
 }
 
 .bobStage {
-    width: 400px;
+    width: 450px;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -124,7 +131,6 @@
 
 .wordText {
     margin-left: 375px;
-    border: 2px solid orange;
     width: 550px;
     display: flex;
     justify-content: center;
@@ -138,7 +144,6 @@
 .alphabet {
     margin-top: 160px;
     margin-left: 450px;
-    border: 2px solid yellow;
     width: 475px;
     float: right;
 }
@@ -171,8 +176,6 @@
 }
 
 .hearts {
-    border: 2px solid purple;
-    width: 400x;
     display: flex;
     justify-content: flex-end;
     gap: 20px;
@@ -201,27 +204,38 @@
 #playAgain {
     font-size: 48px;
     background: transparent;
-    border: 2px solid black;
+    border: none;
     color: rgb(0, 0, 0);
 }
 
 #playAgain:after {
-    content: '';
-    height: 10px;
-    width: 0%;
     background: url(visualRecources/underlineDark.png);
     background-size: cover;
-    border-radius: 10px;
-    display: block;
-    transition: .2s ease-in-out;
 }
 
 #playAgain:hover::after {
-    content:"";
-    height: 10px;
-    width: 100%;
     background: url(visualRecources/underlineDark.png);
     background-size: cover;
-    border-radius: 10px;
-    display: block;
+}
+
+
+/*Modal*/
+.modal-content {
+    background: url(visualRecources/linedPaper.jpg);
+    background-size: cover;
+    height: 200px;
+    border-radius: 0px;
+    border: none;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#modalExitText {
+    position: absolute;
+    bottom: 0;
 }
