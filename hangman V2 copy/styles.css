@@ -153,6 +153,11 @@
     font-size: 24px;
 }
 
+.alphabetItems #S {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
 .active:hover {
     opacity: 50%;
 }
