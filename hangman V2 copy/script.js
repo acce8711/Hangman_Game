@@ -405,8 +405,7 @@ function removeHeart()
 
 function switchExpression()
 {
-    document.getElementsByClassName("playContainer")[0].style.background = "url(visualRecources/playPage"+(incorrectGuesses+1)+".jpg)";
-    document.getElementsByClassName("playContainer")[0].style.backgroundSize = "cover";
+    document.getElementsByClassName("bobStage")[0].src = "visualRecources/bobStage"+(incorrectGuesses+1)+".png";
 }
 
 function checkMaxGuesses()
