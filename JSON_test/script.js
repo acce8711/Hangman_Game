@@ -68,4 +68,9 @@ function countUniqueLetters(str){
 
 
 fetch("./data.json").then(res => res.json())
-.then(data => console.log(data.phobias[1].word));
+.then(data => console.log(data.phobias[1].word))
+.then((data)=>{
+    let selectedThemeVal = themes[0][chosenTheme];
+    let randomNum = data[selectedThemeVal].length();
+    let themeSet = data[selectedThemeVal][randomNum];
+});
