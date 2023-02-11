@@ -116,6 +116,11 @@
     right: 100px;
 }
 
+.themeContainer {
+    background: url(visualRecources/chalkboard.jpg);
+    background-size: cover;
+}
+
 .playContainer {
     background: url(visualRecources/playPage.jpg);
     background-size: cover;
