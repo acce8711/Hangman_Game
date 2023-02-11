@@ -121,6 +121,36 @@
     background-size: cover;
 }
 
+.themeSelection {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#themesTitle {
+    width: 300px;
+}
+
+.themeBox {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.themeButton {
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+}
+
+.themeButton:hover {
+    opacity: 50%;
+}
+
 .playContainer {
     background: url(visualRecources/playPage.jpg);
     background-size: cover;
