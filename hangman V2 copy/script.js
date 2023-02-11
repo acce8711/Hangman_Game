@@ -421,7 +421,7 @@ function winState()
     console.log("you win!");
     $('#winModal').modal('show');
     $('#winModal').on('hidden.bs.modal', function(){
-        startGame();
+        playGame();
     })
 }
 
