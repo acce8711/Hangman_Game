@@ -73,7 +73,7 @@ $(document).ready(function(){
     });
 
     //checking for button hovers to play sound
-    $("#play").mouseenter(function() {
+    $("#play, #playAgain").mouseenter(function() {
         document.getElementById("drawLine").play();
     });
 })
