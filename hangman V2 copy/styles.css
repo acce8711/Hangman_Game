@@ -164,11 +164,15 @@
     left: 0;
 }
 
+.themeSelected {
+ font-size: 24px;
+}
+
 #themeText{
     color: white;
 }
 
-.wordText {
+.wordText, .themeSelected {
     margin-left: 375px;
     width: 550px;
     display: flex;
