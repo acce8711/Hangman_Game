@@ -66,3 +66,6 @@ function countUniqueLetters(str){
     return countedUnique; //return the number of unique characters in the word
 }
 
+
+fetch("./data.json").then(res => res.json())
+.then(data => console.log(data.phobias[1].word));
