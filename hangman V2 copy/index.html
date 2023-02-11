@@ -18,103 +18,107 @@
         <source src="audioRecources/placeholder.mp3" type="audio/mpeg">
     </audio>
 
-    <!--section that prompts the player to play-->
-    <section class="container homeContainer">
-        <div class="containerItems">
-            <div class="icons">
-                <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
+    <div class="hangMan">
+        <!--section that prompts the player to play-->
+        <section class="container homeContainer">
+            <div class="containerItems">
+                <div class="icons">
+                    <button class="icon musicIcon"><img id="musicIcon" src="visualRecources/musicIcon.png" alt="icon of a music symbol"></button>
+                </div>
+                <div class="icons"></div>
+                <!--<h1>Title</h1>-->
+                <button id="play" onclick="pickTheme()">Play</button>
+                <!--<h2 id="tagLine">Help Bob write his essay!</h2>-->
             </div>
-            <div class="icons"></div>
-            <h1>Title</h1>
-            <button id="play" onclick="pickTheme()">Play</button>
-            <h2 id="tagLine">Help Bob write his essay!</h2>
-        </div>
-    </section>
+        </section>
 
-    <!--section that allows the player to choose a theme-->
-    <section class="container themeContainer">
-        <div class="containerItems">
-            <div class="icons">
-                <button class="icon" onclick="startGame()"><img src="" alt="icon of a house symbol"></button>
-                <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
-            </div>
-            <h1></h1>
-            <div class="themeBox" id="themeBox">
-                <!--Theme buttons are generated in script.js-->
-            </div>
-        </div>
-    </section>
-
-    <!--section that contains the main hangman play elements-->
-    <section class="container playContainer">
-        <div class="containerItems">
-            <div class="icons">
-                <button class="icon" onclick="startGame()"><img src="" alt="icon of a house symbol"></button>
-                <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
-                <button class="icon hintIcon"><img src="" alt="icon of a magnifying glass symbol"></button>
-            </div>
-            <div class="hintText">
-                <p id="hint">
-                    <!--Hint from API data-->
-                </p>
-            </div>
-            <div class="wordText">
-                <p id="word">The guessed word goes here</p>
-            </div>
-            <div class="alphabet">
-                <div class="alphabetItems"  id="alphabetItems">
-                    <!--alphabet buttons are generated in script.js-->
+        <!--section that allows the player to choose a theme-->
+        <section class="container themeContainer">
+            <div class="containerItems">
+                <div class="icons">
+                    <button class="icon" onclick="startGame()"><img src="" alt="icon of a house symbol"></button>
+                    <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
+                </div>
+                <h1></h1>
+                <div class="themeBox" id="themeBox">
+                    <!--Theme buttons are generated in script.js-->
                 </div>
             </div>
-            <div class="hearts">
-                <span><img src="visualRecources/filledIn.png" id="heart1" class="heart" ></span>
-                <span><img src="visualRecources/filledIn.png" id="heart2" class="heart" ></span>
-                <span><img src="visualRecources/filledIn.png" id="heart3" class="heart" ></span>
-                <span><img src="visualRecources/filledIn.png" id="heart4" class="heart" ></span>
-                <span><img src="visualRecources/filledIn.png" id="heart5" class="heart" ></span>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="container gameOverContainer">
-        <div class="containerItems">
-            <div class="gameOver">
-                <h1>Game Over</h1>
-                <h4>The word was 
-                    <span id="wordReveal">
-                        <!--get word from API call-->
-                    </span>.
-                </h4>
-                <button id="playAgain" onclick="startGame()">Play Again?</a>
+        <!--section that contains the main hangman play elements-->
+        <section class="container playContainer">
+            <div class="containerItems">
+                <div class="icons">
+                    <button class="icon" onclick="startGame()"><img src="" alt="icon of a house symbol"></button>
+                    <button class="icon musicIcon"><img src="" alt="icon of a music symbol"></button>
+                    <button class="icon hintIcon"><img src="" alt="icon of a magnifying glass symbol"></button>
+                </div>
+                <div class="hintText">
+                    <p id="hint">
+                        <!--Hint from API data-->
+                    </p>
+                </div>
+                <div class="wordText">
+                    <p id="word">The guessed word goes here</p>
+                </div>
+                <div class="alphabet">
+                    <div class="alphabetItems"  id="alphabetItems">
+                        <!--alphabet buttons are generated in script.js-->
+                    </div>
+                </div>
+                <div class="hearts">
+                    <span><img src="visualRecources/filledIn.png" id="heart1" class="heart" ></span>
+                    <span><img src="visualRecources/filledIn.png" id="heart2" class="heart" ></span>
+                    <span><img src="visualRecources/filledIn.png" id="heart3" class="heart" ></span>
+                    <span><img src="visualRecources/filledIn.png" id="heart4" class="heart" ></span>
+                    <span><img src="visualRecources/filledIn.png" id="heart5" class="heart" ></span>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="container gameOverContainer">
+            <div class="containerItems">
+                <div class="gameOver">
+                    <h1>Game Over</h1>
+                    <h4>The word was 
+                        <span id="wordReveal">
+                            <!--get word from API call-->
+                        </span>.
+                    </h4>
+                    <button id="playAgain" onclick="startGame()">Play Again?</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <!--hint modal popup bootstrap-->
-           <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                                <h4>
-                                    Hmm...something something 
-                                    <span id="categoryHint">
-                                    <!--category given from API-->
-                                    </span>
-                                </h4>
-                            </h4>
-                        </div>
-                    </div>
+    <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                        <h4>
+                            Hmm...something something 
+                            <span id="categoryHint">
+                            <!--category given from API-->
+                            </span>
+                        </h4>
+                    </h4>
                 </div>
             </div>
-    <!--win Modal-->
-           <div class="modal fade" id="winModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <h2>You guessed correctly!</h2>
-                        </div>
-                    </div>
+        </div>
+    </div>
+<!--win Modal-->
+   <div class="modal fade" id="winModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>You guessed correctly!</h2>
                 </div>
             </div>
+        </div>
+    </div>
+    
     <!--linking the jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <!--linking the Bootstrap js-->

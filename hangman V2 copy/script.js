@@ -241,11 +241,15 @@ function toggleMusic(active)
     if (active)
     {
         document.getElementById("upbeatMusic").play();
+        document.getElementById("musicIcon").src = "visualRecources/musicIcon.png";
+        document.getElementById("musicIcon").style.width = "40px";
     }
     else 
     {
         document.getElementById("upbeatMusic").pause();
-        winState();
+        document.getElementById("musicIcon").src = "visualRecources/musicIconSlash.png";
+        document.getElementById("musicIcon").style.width = "50px";
+        //winState();
     }
 }
 

@@ -1,0 +1,73 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*creating css colour variables which contain colour codes*/
+/*useful for when switching between light mode and dark mode*/
+/*learned about css variables from w3schools https://www.w3schools.com/css/css3_variables.asp*/
+:root {
+  --navBar: #fc4f1b;
+  --white: white;
+  --offwhite: #f2f2f2;
+  --red: #cb3b24;
+  --offblack: #222831;
+  --grey: #393e46;
+  --iconHover: #e7e7e7;
+}
+
+
+
+.hangMan {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+}
+
+.container {
+    width: 1000px;
+    height: 564px;
+    background-color: aqua;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.homeContainer {
+    background: url(visualRecources/homeScreen.jpg);
+    background-size: contain;
+}
+
+.containerItems {
+    width: 95%;
+    border: 2px solid red;
+    margin-top: 20px;
+}
+
+.icon {
+    background-color: transparent;
+    border: none;
+    height: 50px;
+    display: flex;
+}
+
+.icon img {
+    width: 40px;
+    float: inline-start;
+}
+
+.icon:hover {
+    opacity: 50%;
+}
+
+#play {
+    margin-top: 300px;
+    margin-right: 300px;
+    float: right;
+}
