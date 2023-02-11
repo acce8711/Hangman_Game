@@ -176,7 +176,6 @@
 
 .wordText, .themeSelected {
     right: 0;
-    border: 2px solid red;
     width: 450px;
     display: flex;
     justify-content: center;
