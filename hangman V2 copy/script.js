@@ -316,7 +316,7 @@ function showContainer(className)
 
 function toggleMusic(active)
 {
-    var musicIcons = document.getElementsByClassName("musicIcon");
+    var musicIcons = document.getElementsByClassName("musicIconImg");
 
     if (active)
     {
