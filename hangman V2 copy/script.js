@@ -20,8 +20,8 @@ var uniqueLetterCounter = 0;  //counter stores the number of unique letters that
 //Generating theme buttons
 
 const themes = [
-    ["School Subjects", "Emotions", "Theme 3", "Theme 4", "Theme 5", "Theme 6"],
-    [0, 1, 2, 3, 4, 5]
+    ["Idioms", "Phobias", "Latin Names", "Plants", "Geography", "Random"],
+    [0, 1, 2, 3, 4, 5, 6]
 ];
 
 const themeWords = [
@@ -50,6 +50,7 @@ $(document).ready(function(){
         //getting the value of the clicked theme button
         var selectedTheme = $(this).val();
         chosenTheme = selectedTheme;
+        console.log(chosenTheme);
         playGame();
     });
 
@@ -139,12 +140,14 @@ function playGame()
     //numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
     uniqueLetterCounter = 0;     
 
+    if(chosenTheme == 5)
+    {
     fetch(url)
     .then(res => res.json())
     .then(data => {
         numLetters = data.numLetters;
-        //word = data.word;
-        word = "hello bob";
+        word = data.word;
+        //word = "hello bob";
         category = data.category;
         let hint = category.toUpperCase();
         $("#hint").html(hint);
@@ -200,6 +203,71 @@ function playGame()
         */
         guessedWord();
     });
+    }
+    else
+    {
+    fetch('./data.json')
+    .then(res => res.json())
+    .then(data => {
+        numLetters = data.numLetters;
+        word = data.word;
+        //word = "hello bob";
+        category = data.category;
+        let hint = category.toUpperCase();
+        $("#hint").html(hint);
+        })
+    .then(() => {
+        console.log(word);
+        console.log("The number of letters in " + word + " is " + numLetters);
+        console.log(category);
+        })
+    .then(()=>{
+        numUniqueLetters = countUniqueLetters(word);
+        console.log("Unique letters ", numUniqueLetters);
+        })
+   .then(()=>{
+        //to include code for what happens after JSON response
+        //resetting all alphabet buttons
+        var alphabetButtons = document.getElementsByClassName("alphabetLetter")
+        for (let i = 0; i < alphabetButtons.length; i++)
+        {
+            alphabetButtons[i].disabled = false;
+            alphabetButtons[i].className = "alphabetLetter active";
+            alphabetButtons[i].style.color = "white";
+        }
+
+        //resetting all of the hearts
+        var hearts = document.getElementsByClassName("heart");
+        for (let i = 0; i < hearts.length; i++)
+        {
+            hearts[i].src = "visualRecources/filledHeart.png";
+        }
+
+        console.log(chosenTheme);
+        hideContainers();
+        showContainer(".playContainer");
+        switchExpression();
+
+        /*
+        var positionChosen = false;
+        while (!positionChosen)
+        {
+            var wordPosition = Math.floor(Math.random() * 10)
+            if (!completedWords.includes(wordPosition))
+            {
+                positionChosen = true;
+            }
+        }
+        */
+        //selecting a random word from the selected theme category
+        /*
+        word = themeWords[chosenTheme][wordPosition];
+        completedWords.push(wordPosition);
+        console.log(completedWords);
+        */
+        guessedWord();
+    });
+    }
 }
 
 //function to show game over page
@@ -262,11 +330,11 @@ function toggleMusic(active)
     }
 }
 
-function guessedWord() {
+function guessedWord()
+{
     wordStatus = word.toUpperCase().split('').map(function (letter) {
         if (letter == ' ')
         {
-            
             return  "&nbsp&nbsp&nbsp";
         }
         if (guessedLetters.indexOf(letter) >= 0 )
@@ -284,7 +352,8 @@ function guessedWord() {
     
 }
 
-function guessLetter(letter) {
+function guessLetter(letter)
+{
     var currentLetterButton = document.getElementById(letter);
 
     if (word.toUpperCase().includes(letter) && !guessedLetters.includes(letter))
@@ -351,7 +420,8 @@ function winState()
 }
 
 //function to count the number of unique letters in a word
-function countUniqueLetters(str){
+function countUniqueLetters(str)
+{
     let unique = ""; //create new string to store unique characters in the word
     for(let i = 0; i < str.length; i++){
         if(unique.includes(word[i])===false && word[i] != " "){
@@ -370,10 +440,9 @@ function countUniqueLetters(str){
         //$('.modal').modal('show');
     })
 
-
-//Themes JSON trial
-
-fetch("./data.json").then(res => {
-    return res.json();
-}).then(data => console.log(data))
-.then(data => console.log(data));
+//function to count the number of letters
+function countNumLetters(str)
+{
+    let numLetters = str.length;
+    return numLetters;
+}
