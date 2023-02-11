@@ -16,6 +16,7 @@ var wordStatus = null;
 var numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
 var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
 
+var musicToggleSelection = true;
 
 //Generating theme buttons
 
@@ -41,8 +42,8 @@ $(document).ready(function(){
     //checking if the music button has been clicked
     $(".musicIcon").click(function () {
         $(this).toggleClass("inactive");
-        var active = ($(this).hasClass("inactive")) ? false : true;
-        toggleMusic(active);
+        musicToggleSelection = ($(this).hasClass("inactive")) ? false : true;
+        toggleMusic(musicToggleSelection);
     })
 
     //jquery will monitor if a theme button has been clicked
@@ -132,6 +133,8 @@ function pickTheme()
     console.log("Playing game");
     hideContainers();
     showContainer(".themeContainer");
+    document.getElementById("gameOver").pause();
+    toggleMusic(musicToggleSelection);
 }
 
 function playGame()
@@ -284,10 +287,14 @@ function playGame()
 //function to show game over page
 function gameOver()
 {
+    toggleMusic(false);
+    document.getElementById("gameOver").currentTime = 0;
+    document.getElementById("gameOver").play();
     hideContainers();
     $("#wordReveal").html(word);
     showContainer(".gameOverContainer");
     //button in game over page to reset variables and game state
+
 }
 
 //function to show win state popup
