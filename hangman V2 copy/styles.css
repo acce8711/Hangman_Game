@@ -58,6 +58,7 @@
 .icons {
     border: 2px solid rgb(23, 78, 12);
     display: flex;
+    height: 50px;
 }
 
 .icon {
@@ -65,12 +66,11 @@
     border: none;
     display: flex;
     width: 60px;
-    height: 50px;
 }
 
 .icon img {
     height: 30px;
-    float: inline-start;
+    
 }
 
 .icon:hover {
@@ -151,6 +151,11 @@
     background-color: transparent;
     color: white;
     font-size: 24px;
+}
+
+.alphabetItems #S {
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
 .active:hover {
