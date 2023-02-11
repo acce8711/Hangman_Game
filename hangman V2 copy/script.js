@@ -72,6 +72,10 @@ $(document).ready(function(){
         guessedWord();
     });
 
+    //checking for button hovers to play sound
+    $("#play").mouseenter(function() {
+        document.getElementById("drawLine").play();
+    });
 })
 
 generateThemeButtons();
@@ -370,6 +374,7 @@ function guessLetter(letter)
         uniqueLetterCounter++;
         console.log(uniqueLetterCounter);
         currentLetterButton.style.color = "var(--correctGuess)";
+        document.getElementById("correctLetter").play();
         if (uniqueLetterCounter >= numUniqueLetters)
         {
             winState();
@@ -389,6 +394,11 @@ function guessLetter(letter)
         switchExpression();
         checkMaxGuesses();
         currentLetterButton.style.color = "var(--wrongGuess)";
+        if(incorrectGuesses != 5)
+        {
+            document.getElementById("incorrectLetter").play();
+        }
+        
         
     }
     //disabling the button that was just clicked
