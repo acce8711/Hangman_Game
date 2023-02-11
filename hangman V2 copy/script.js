@@ -143,7 +143,8 @@ function playGame()
     .then(res => res.json())
     .then(data => {
         numLetters = data.numLetters;
-        word = data.word;
+        //word = data.word;
+        word = "hello bob";
         category = data.category;
         let hint = category.toUpperCase();
         $("#hint").html(hint);
@@ -155,7 +156,7 @@ function playGame()
         })
     .then(()=>{
         numUniqueLetters = countUniqueLetters(word);
-        console.log(numUniqueLetters);
+        console.log("Unique letters ", numUniqueLetters);
         })
    .then(()=>{
         //to include code for what happens after JSON response
@@ -168,10 +169,9 @@ function playGame()
 
         //resetting all of the hearts
         var hearts = document.getElementsByClassName("heart");
-        console.log(hearts);
         for (let i = 0; i < hearts.length; i++)
         {
-            hearts[i].src = "visualRecources/filledIn.png";
+            hearts[i].src = "visualRecources/filledHeart.png";
         }
 
         console.log(chosenTheme);
@@ -238,24 +238,47 @@ function showContainer(className)
 
 function toggleMusic(active)
 {
+    var musicIcons = document.getElementsByClassName("musicIcon");
+
     if (active)
     {
         document.getElementById("upbeatMusic").play();
-        document.getElementById("musicIcon").src = "visualRecources/musicIcon.png";
-        document.getElementById("musicIcon").style.width = "40px";
+        for (let i = 0; i < musicIcons.length; i++) {
+            musicIcons[i].src = "visualRecources/musicIcon.png";
+            musicIcons[i].style.height = "30px";
+        }
     }
     else 
     {
         document.getElementById("upbeatMusic").pause();
-        document.getElementById("musicIcon").src = "visualRecources/musicIconSlash.png";
-        document.getElementById("musicIcon").style.width = "50px";
+        for (let i = 0; i < musicIcons.length; i++) {
+            musicIcons[i].src = "visualRecources/musicIconSlash.png";
+            musicIcons[i].style.height = "31px";
+        }
         //winState();
     }
 }
 
 function guessedWord() {
-    wordStatus = word.toUpperCase().split('').map(letter => (guessedLetters.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+    wordStatus = word.toUpperCase().split('').map(function (letter) {
+        if (letter == ' ')
+        {
+            
+            return  "&nbsp&nbsp&nbsp";
+        }
+        if (guessedLetters.indexOf(letter) >= 0 )
+        {
+            return letter;
+        }
+        else {
+            return " _ ";
+        }
+    }).join('');
+        
+    /*
+        guessedLetters.indexOf(letter) >= 0 ? letter : " _ ")).join('');*/
     document.getElementById("word").innerHTML = wordStatus;
+    
 }
 
 function guessLetter(letter) {
@@ -290,7 +313,7 @@ function guessLetter(letter) {
 function removeHeart() 
 {
     console.log("hello noob");
-    document.getElementById("heart" + incorrectGuesses).src = "visualRecources/unfilled.png";
+    document.getElementById("heart" + incorrectGuesses).src = "visualRecources/unfilledHeart.png";
 }
 
 function checkMaxGuesses()
@@ -314,7 +337,7 @@ function winState()
 function countUniqueLetters(str){
     let unique = ""; //create new string to store unique characters in the word
     for(let i = 0; i < str.length; i++){
-        if(unique.includes(word[i])===false){
+        if(unique.includes(word[i])===false && word[i] != " "){
             unique += str[i]; //add unique letters to the new string
         }
     }

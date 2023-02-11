@@ -5,6 +5,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Pangolin', cursive;
 }
 
 /*creating css colour variables which contain colour codes*/
@@ -26,7 +27,6 @@
     height: 100vh;
     display: flex;
     align-items: center;
-
 }
 
 .container {
@@ -41,7 +41,7 @@
 
 .homeContainer {
     background: url(visualRecources/homeScreen2.jpg);
-    background-size: contain;
+    background-size: cover;
 }
 
 .containerItems {
@@ -50,15 +50,21 @@
     margin-top: 20px;
 }
 
-.icon {
-    background-color: transparent;
-    border: none;
+.icons {
     height: 50px;
+    border: 2px solid rgb(23, 78, 12);
     display: flex;
 }
 
+.icon {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    width: 60px;
+}
+
 .icon img {
-    width: 40px;
+    height: 30px;
     float: inline-start;
 }
 
@@ -70,7 +76,6 @@
     margin-top: 250px;
     margin-right: 200px;
     float: right;
-    font-family: 'Pangolin', cursive;
     font-size: 64px;
     background: transparent;
     border: none;
@@ -83,8 +88,9 @@
     width: 0%;
     background: url(visualRecources/underline.png);
     background-size: cover;
+    border-radius: 10px;
     display: block;
-    transition: .25s ease-in-out;
+    transition: .2s ease-in-out;
 }
 
 #play:hover::after {
@@ -93,5 +99,15 @@
     width: 100%;
     background: url(visualRecources/underline.png);
     background-size: cover;
+    border-radius: 10px;
     display: block;
+}
+
+.playContainer {
+    background: url(visualRecources/playPage1.jpg);
+    background-size: cover;
+}
+
+#word {
+    color: #e7e7e7;
 }
