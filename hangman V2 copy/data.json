@@ -1,0 +1,14 @@
+{
+    "phobias":[
+        {"word":"phobia1", "hint":"hint"},
+        {"word":"phobia2", "hint":"hint"},
+        {"word":"phobia3", "hint":"hint"},
+        {"word":"phobia4", "hint":"hint"},
+        {"word":"phobia5", "hint":"hint"}
+    ],
+    "idioms":[
+        {"word":"idiom1", "hint":"hint1"},
+        {"word":"idiom2", "hint":"hint1"},
+        {"word":"idiom3", "hint":"hint1"}
+    ]
+}

@@ -369,3 +369,11 @@ function countUniqueLetters(str){
         //const myModal = new bootstrap.Modal(document.getElementById('winModal'));
         //$('.modal').modal('show');
     })
+
+
+//Themes JSON trial
+
+fetch("./data.json").then(res => {
+    return res.json();
+}).then(data => console.log(data))
+.then(data => console.log(data));
