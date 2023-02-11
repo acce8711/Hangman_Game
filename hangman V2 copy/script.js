@@ -21,7 +21,7 @@ var musicToggleSelection = true;
 //Generating theme buttons
 
 const themes = [
-    ["Idioms", "Phobias", "Latin Names", "Plants", "Geography", "Random"],
+    ["Idioms", "Phobias", "Latin", "Plants", "Geography", "Random"],
     [0, 1, 2, 3, 4, 5]
 ];
 
@@ -295,7 +295,6 @@ function gameOver()
     $("#wordReveal").html(word);
     showContainer(".gameOverContainer");
     //button in game over page to reset variables and game state
-
 }
 
 //function to show win state popup
