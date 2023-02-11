@@ -35,6 +35,7 @@ const themes = [
 // ]
     
 $(document).ready(function(){
+    toggleMusic(true);
 
     //displaying the section that prompt the user to play
     startGame();
@@ -124,7 +125,6 @@ function startGame()
 {
     hideContainers();
     showContainer(".homeContainer");
-    toggleMusic(musicToggleSelection);
     //playing audio
     //playMainMusic(true);
 }
@@ -406,6 +406,9 @@ function guessLetter(letter)
         {
             document.getElementById("incorrectLetter").play();
         }
+        document.getElementById("hmph").classList.add("hmph");
+        setTimeout(myFunction, 900)
+        //document.getElementById("hmph").classList.remove("hmph");
         
         
     }
@@ -413,6 +416,11 @@ function guessLetter(letter)
     currentLetterButton.disabled = true;
     currentLetterButton.className = "alphabetLetter inactive";
     
+}
+
+function myFunction()
+{
+    document.getElementById("hmph").classList.remove("hmph");
 }
 
 function removeHeart() 
