@@ -3,7 +3,7 @@ const url = `https://www.wordgamedb.com/api/v1/words/random`; //API to get words
 const numThemes = 6;        //number of themes
 // const winModal = document.getElementById("#winModal"); //winModal
 var chosenTheme;            //selected theme
-var category;              //category from API call
+var hint;                   //hint for the word
 var word;                   //selected word from API call
 var hearts = 5;                 //number of hearts
 var spaces;                 //number of spaces in a word
@@ -24,14 +24,14 @@ const themes = [
     [0, 1, 2, 3, 4, 5, 6]
 ];
 
-const themeWords = [
-    ["Mathematics", "English", "Science", "Art", "Physical-Education", "Algebra", "Biology", "Calculus", "Chemistry", "Film", "Computer-Science"],
-    [],
-    [],
-    [],
-    [],
-    [],
-]
+// const themeWords = [
+//     ["Mathematics", "English", "Science", "Art", "Physical-Education", "Algebra", "Biology", "Calculus", "Chemistry", "Film", "Computer-Science"],
+//     [],
+//     [],
+//     [],
+//     [],
+//     [],
+// ]
     
 $(document).ready(function(){
 
@@ -50,6 +50,7 @@ $(document).ready(function(){
         //getting the value of the clicked theme button
         var selectedTheme = $(this).val();
         chosenTheme = selectedTheme;
+        console.log(selectedTheme);
         console.log(chosenTheme);
         playGame();
     });
@@ -58,8 +59,8 @@ $(document).ready(function(){
     $(".hintIcon").click(function () {
         $('#hintModal').modal('toggle');
         console.log("Hint modal activated");
-        console.log(category);
-        $("#categoryHint").html(category);
+        console.log(hint);
+        $("#hintText").html(hint);
     });
 
     //jquery will monitor if a alphabet button has been clicked
@@ -140,7 +141,7 @@ function playGame()
     //numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
     uniqueLetterCounter = 0;     
 
-    if(chosenTheme == 5)
+    if(chosenTheme == 5) //if selected theme is "Random"
     {
     fetch(url)
     .then(res => res.json())
@@ -148,14 +149,13 @@ function playGame()
         numLetters = data.numLetters;
         word = data.word;
         //word = "hello bob";
-        category = data.category;
-        let hint = category.toUpperCase();
-        $("#hint").html(hint);
+        hint = data.category;
+        $("#themeText").html(themes[0][chosenTheme]); //display selected theme on screen
         })
     .then(() => {
         console.log(word);
         console.log("The number of letters in " + word + " is " + numLetters);
-        console.log(category);
+        console.log("The hint is " + hint);
         })
     .then(()=>{
         numUniqueLetters = countUniqueLetters(word);
@@ -204,22 +204,29 @@ function playGame()
         guessedWord();
     });
     }
-    else
+    else //if the theme selected is not random
     {
-    fetch('./data.json')
+    fetch('./data.json') //fetch from local JSON file
     .then(res => res.json())
     .then(data => {
-        numLetters = data.numLetters;
-        word = data.word;
+        let selectedThemeVal = themes[0][chosenTheme]; //get string value of chosen them
+        console.log(selectedThemeVal);
+        let themeSetSize = data[""+selectedThemeVal+""].length; //get the number of word entries in the chosen theme set
+        console.log("The number of entries in " + selectedThemeVal + " is " + themeSetSize);
         //word = "hello bob";
-        category = data.category;
-        let hint = category.toUpperCase();
-        $("#hint").html(hint);
+        randomNum = Math.floor(Math.random()*themeSetSize); //randomise the word selected from the theme set
+        console.log(randomNum);
+        hint = data[""+selectedThemeVal+""][randomNum].hint; //get the hint from the selected word
+        console.log("The hint is" + hint);
+        word = data[""+selectedThemeVal+""][randomNum].word; //get selected word
+        console.log("The word is" + word);
+        numLetters = word.length; //get length of word
+        $("#themeText").html(themes[0][chosenTheme]); //display theme selected on screen
         })
     .then(() => {
         console.log(word);
         console.log("The number of letters in " + word + " is " + numLetters);
-        console.log(category);
+        console.log(hint);
         })
     .then(()=>{
         numUniqueLetters = countUniqueLetters(word);
@@ -439,9 +446,3 @@ function countUniqueLetters(str)
         //$('.modal').modal('show');
     })
 
-//function to count the number of letters
-function countNumLetters(str)
-{
-    let numLetters = str.length;
-    return numLetters;
-}

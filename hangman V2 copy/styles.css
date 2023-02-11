@@ -134,6 +134,10 @@
     left: 0;
 }
 
+#themeText{
+    color: white;
+}
+
 .wordText {
     margin-left: 375px;
     width: 550px;
