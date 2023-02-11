@@ -124,6 +124,7 @@ function startGame()
 {
     hideContainers();
     showContainer(".homeContainer");
+    toggleMusic(musicToggleSelection);
     //playing audio
     //playMainMusic(true);
 }
