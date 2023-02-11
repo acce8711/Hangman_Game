@@ -110,8 +110,16 @@
 }
 
 .playContainer {
-    background: url(visualRecources/playPage1.jpg);
+    background: url(visualRecources/playPage.jpg);
     background-size: cover;
+    position: relative;
+}
+
+.bobStage {
+    width: 400px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 .wordText {
