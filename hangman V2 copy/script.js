@@ -101,7 +101,7 @@ function generateAlphabetButtons() {
         alphabetButton.appendChild(node);
         alphabetButton.value = currentLetter;
         alphabetButton.id = currentLetter;
-        alphabetButton.className = "alphabetLetter";
+        alphabetButton.className = "alphabetLetter active";
 
         //appending the button to the html 
         const element = document.getElementById("alphabetItems");
@@ -165,6 +165,8 @@ function playGame()
         for (let i = 0; i < alphabetButtons.length; i++)
         {
             alphabetButtons[i].disabled = false;
+            alphabetButtons[i].className = "alphabetLetter active";
+            alphabetButtons[i].style.color = "white";
         }
 
         //resetting all of the hearts
@@ -177,6 +179,7 @@ function playGame()
         console.log(chosenTheme);
         hideContainers();
         showContainer(".playContainer");
+        switchExpression();
 
         /*
         var positionChosen = false;
@@ -282,12 +285,15 @@ function guessedWord() {
 }
 
 function guessLetter(letter) {
+    var currentLetterButton = document.getElementById(letter);
+
     if (word.toUpperCase().includes(letter) && !guessedLetters.includes(letter))
     {
         console.log("I ", letter, " am included !");
         guessedLetters.push(letter);
         uniqueLetterCounter++;
         console.log(uniqueLetterCounter);
+        currentLetterButton.style.color = "var(--correctGuess)";
         if (uniqueLetterCounter >= numUniqueLetters)
         {
             winState();
@@ -304,16 +310,27 @@ function guessLetter(letter) {
         incorrectGuesses++;
         console.log(incorrectGuesses);
         removeHeart();
+        switchExpression();
         checkMaxGuesses();
+        currentLetterButton.style.color = "var(--wrongGuess)";
+        
     }
     //disabling the button that was just clicked
-    document.getElementById(letter).disabled = true;
+    currentLetterButton.disabled = true;
+    currentLetterButton.className = "alphabetLetter inactive";
+    
 }
 
 function removeHeart() 
 {
     console.log("hello noob");
     document.getElementById("heart" + incorrectGuesses).src = "visualRecources/unfilledHeart.png";
+}
+
+function switchExpression()
+{
+    document.getElementsByClassName("playContainer")[0].style.background = "url(visualRecources/playPage"+(incorrectGuesses+1)+".jpg)";
+    document.getElementsByClassName("playContainer")[0].style.backgroundSize = "cover";
 }
 
 function checkMaxGuesses()

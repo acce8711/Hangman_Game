@@ -19,6 +19,8 @@
   --offblack: #222831;
   --grey: #393e46;
   --iconHover: #e7e7e7;
+  --wrongGuess: #da8181;
+  --correctGuess: #99d880;
 }
 
 
@@ -37,6 +39,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .homeContainer {
@@ -46,12 +49,13 @@
 
 .containerItems {
     width: 95%;
+    height: 90%;
     border: 2px solid red;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .icons {
-    height: 50px;
     border: 2px solid rgb(23, 78, 12);
     display: flex;
 }
@@ -61,6 +65,7 @@
     border: none;
     display: flex;
     width: 60px;
+    height: 50px;
 }
 
 .icon img {
@@ -74,11 +79,12 @@
 
 #play {
     margin-top: 250px;
-    margin-right: 200px;
+    width: fit-content;
+    margin-left: 600px;
     float: right;
     font-size: 64px;
     background: transparent;
-    border: none;
+    border: 2px solid black;
     color: rgb(230, 230, 230);
 }
 
@@ -108,6 +114,101 @@
     background-size: cover;
 }
 
+.wordText {
+    margin-left: 375px;
+    border: 2px solid orange;
+    width: 550px;
+    display: flex;
+    justify-content: center;
+}
+
 #word {
     color: #e7e7e7;
+    font-size: 24px;
+}
+
+.alphabet {
+    margin-top: 160px;
+    margin-left: 450px;
+    border: 2px solid yellow;
+    width: 475px;
+    float: right;
+}
+
+.alphabetItems {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    /*
+    grid-auto-flow: dense;
+    direction: rtl;
+    */
+    gap: 5px;
+}
+
+.alphabetLetter {
+    aspect-ratio: 1/1;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+}
+
+.active:hover {
+    opacity: 50%;
+}
+
+.hearts {
+    border: 2px solid purple;
+    width: 400x;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.heart {
+    height: 35px;
+}
+
+
+.gameOverContainer  {
+    background: url(visualRecources/gameOver.jpg);
+    background-size: cover;
+}
+
+.gameOverContainer .containerItems {
+    align-items: center;
+    text-align: center;
+}
+
+.gameOver {
+    margin-top: 350px;
+}
+
+#playAgain {
+    font-size: 48px;
+    background: transparent;
+    border: 2px solid black;
+    color: rgb(0, 0, 0);
+}
+
+#playAgain:after {
+    content: '';
+    height: 10px;
+    width: 0%;
+    background: url(visualRecources/underlineDark.png);
+    background-size: cover;
+    border-radius: 10px;
+    display: block;
+    transition: .2s ease-in-out;
+}
+
+#playAgain:hover::after {
+    content:"";
+    height: 10px;
+    width: 100%;
+    background: url(visualRecources/underlineDark.png);
+    background-size: cover;
+    border-radius: 10px;
+    display: block;
 }
