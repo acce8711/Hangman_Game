@@ -40,7 +40,7 @@
 }
 
 .homeContainer {
-    background: url(visualRecources/homeScreen.jpg);
+    background: url(visualRecources/homeScreen2.jpg);
     background-size: contain;
 }
 
@@ -67,7 +67,31 @@
 }
 
 #play {
-    margin-top: 300px;
-    margin-right: 300px;
+    margin-top: 250px;
+    margin-right: 200px;
     float: right;
+    font-family: 'Pangolin', cursive;
+    font-size: 64px;
+    background: transparent;
+    border: none;
+    color: rgb(230, 230, 230);
+}
+
+#play:after {
+    content: '';
+    height: 10px;
+    width: 0%;
+    background: url(visualRecources/underline.png);
+    background-size: cover;
+    display: block;
+    transition: .25s ease-in-out;
+}
+
+#play:hover::after {
+    content:"";
+    height: 10px;
+    width: 100%;
+    background: url(visualRecources/underline.png);
+    background-size: cover;
+    display: block;
 }
