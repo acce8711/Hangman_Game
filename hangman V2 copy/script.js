@@ -387,10 +387,13 @@ function guessLetter(letter)
         uniqueLetterCounter++;
         console.log(uniqueLetterCounter);
         currentLetterButton.style.color = "var(--correctGuess)";
-        document.getElementById("correctLetter").play();
         if (uniqueLetterCounter >= numUniqueLetters)
         {
             winState();
+        }
+        else 
+        {
+            document.getElementById("correctLetter").play();
         }
         //get word, create variable to store number of unique letters
         //create variable for unique letter counter
@@ -449,6 +452,16 @@ function checkMaxGuesses()
     {
         gameOver();
     }
+}
+
+function winState()
+{
+    console.log("you win!");
+    document.getElementById("correct").play();
+    $('#winModal').modal('show');
+    $('#winModal').on('hidden.bs.modal', function(){
+        playGame();
+    })
 }
 
 //function to count the number of unique letters in a word
