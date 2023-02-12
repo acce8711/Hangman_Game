@@ -226,7 +226,7 @@ function playGame()
         console.log(randomNum);
         hint = data[""+selectedThemeVal+""][randomNum].hint; //get the hint from the selected word
         console.log("The hint is" + hint);
-        word = data[""+selectedThemeVal+""][randomNum].word; //get selected word
+        word = data[""+selectedThemeVal+""][randomNum].word.toUpperCase(); //get selected word
         console.log("The word is" + word);
         numLetters = word.length; //get length of word
         $("#themeText").html(themes[0][chosenTheme]); //display theme selected on screen
