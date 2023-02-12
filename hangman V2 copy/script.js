@@ -1,7 +1,6 @@
 //Global variables
 const url = `https://www.wordgamedb.com/api/v1/words/random`; //API to get words, category, and letter count
 const numThemes = 6;        //number of themes
-// const winModal = document.getElementById("#winModal"); //winModal
 var chosenTheme;            //selected theme
 var hint;                   //hint for the word
 var word;                   //selected word from API call
@@ -15,7 +14,6 @@ var answer = "banana"; //word used for testing
 var wordStatus = null;
 var numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
 var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
-
 var musicToggleSelection = true;
 
 //Generating theme buttons
@@ -25,15 +23,6 @@ const themes = [
     [0, 1, 2, 3, 4, 5]
 ];
 
-// const themeWords = [
-//     ["Mathematics", "English", "Science", "Art", "Physical-Education", "Algebra", "Biology", "Calculus", "Chemistry", "Film", "Computer-Science"],
-//     [],
-//     [],
-//     [],
-//     [],
-//     [],
-// ]
-    
 $(document).ready(function(){
     toggleMusic(true);
 
@@ -129,6 +118,7 @@ function startGame()
     //playMainMusic(true);
 }
 
+
 function pickTheme()
 {
     console.log("Playing game");
@@ -221,13 +211,12 @@ function playGame()
         console.log(selectedThemeVal);
         let themeSetSize = data[""+selectedThemeVal+""].length; //get the number of word entries in the chosen theme set
         console.log("The number of entries in " + selectedThemeVal + " is " + themeSetSize);
-        //word = "hello bob";
         randomNum = Math.floor(Math.random()*themeSetSize); //randomise the word selected from the theme set
         console.log(randomNum);
         hint = data[""+selectedThemeVal+""][randomNum].hint; //get the hint from the selected word
-        console.log("The hint is" + hint);
+        console.log("The hint is " + hint);
         word = data[""+selectedThemeVal+""][randomNum].word; //get selected word
-        console.log("The word is" + word);
+        console.log("The word is " + word);
         numLetters = word.length; //get length of word
         $("#themeText").html(themes[0][chosenTheme]); //display theme selected on screen
         })
@@ -297,16 +286,14 @@ function gameOver()
     //button in game over page to reset variables and game state
 }
 
-//function to show win state popup
 function winState()
 {
-    showContainer(".winStateContainer");
-    //show modal
-    $(winModal).modal('show');
-    //add document.addEventListener to click anywhere to close modal and restart game
+    console.log("you win!");
+    $('#winModal').modal('show');
+    $('#winModal').on('hidden.bs.modal', function(){
+        playGame();
+    })
 }
-
-
 
 //function hides all of the containers
 function hideContainers()
@@ -431,7 +418,10 @@ function removeHeart()
 
 function switchExpression()
 {
-    document.getElementsByClassName("bobStage")[0].src = "visualRecources/bobStage"+(incorrectGuesses+1)+".png";
+    if(incorrectGuesses < 5)
+    {
+        document.getElementsByClassName("bobStage")[0].src = "visualRecources/bobStage"+(incorrectGuesses+1)+".png";
+    }
 }
 
 function checkMaxGuesses()
@@ -440,15 +430,6 @@ function checkMaxGuesses()
     {
         gameOver();
     }
-}
-
-function winState()
-{
-    console.log("you win!");
-    $('#winModal').modal('show');
-    $('#winModal').on('hidden.bs.modal', function(){
-        playGame();
-    })
 }
 
 //function to count the number of unique letters in a word
