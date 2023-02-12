@@ -302,6 +302,7 @@ function gameOver()
     hideContainers();
     $("#wordReveal").html(word);
     showContainer(".gameOverContainer");
+    bobBlink();
     //button in game over page to reset variables and game state
 }
 
@@ -479,3 +480,14 @@ function countUniqueLetters(str)
     return countedUnique; //return the number of unique characters in the word
 }
 
+function bobBlink()
+{
+    $(".gameOverContainer").css({"background":"url(visualRecources/gameOverClosed.jpg)", "background-size":"cover"});
+    setTimeout(bobDevastated, Math.random()*(800-100)+100);
+}
+
+function bobDevastated()
+{
+    $(".gameOverContainer").css({"background":"url(visualRecources/gameOver.jpg)", "background-size":"cover"});
+    setTimeout(bobBlink,Math.random()*(2000-100)+100);
+}
