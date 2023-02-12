@@ -482,12 +482,12 @@ function countUniqueLetters(str)
 
 function bobBlink()
 {
-    $(".gameOverContainer").css({"background":"url(visualRecources/gameOverClosed.jpg)", "background-size":"cover"});
+    $("#bobEyes").attr({"src":"visualRecources/bobEyesClosed.png"});
     setTimeout(bobDevastated, Math.random()*(800-100)+100);
 }
 
 function bobDevastated()
 {
-    $(".gameOverContainer").css({"background":"url(visualRecources/gameOver.jpg)", "background-size":"cover"});
+    $("#bobEyes").attr({"src":"visualRecources/bobEyesOpen.png"});
     setTimeout(bobBlink,Math.random()*(2000-100)+100);
 }

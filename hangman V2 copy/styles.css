@@ -269,6 +269,12 @@
     text-align: center;
 }
 
+#bobEyes {
+    width: 600px;
+    margin-top: 70px;
+    position: absolute;
+}
+
 .gameOver {
     margin-top: 350px;
 }
