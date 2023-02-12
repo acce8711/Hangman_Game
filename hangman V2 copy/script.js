@@ -16,6 +16,11 @@ var numUniqueLetters = 3; //variable stores the number of unique letters that th
 var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
 var musicToggleSelection = true;
 
+//Typewriter vars
+var i = 0;
+var txt = "Help Bob write his essay!";
+var speed = 80;
+
 //Generating theme buttons
 
 const themes = [
@@ -28,6 +33,7 @@ $(document).ready(function(){
 
     //displaying the section that prompt the user to play
     startGame();
+    typewriter();
 
     //checking if the music button has been clicked
     $(".musicIcon").click(function () {
@@ -116,6 +122,17 @@ function startGame()
     showContainer(".homeContainer");
     //playing audio
     //playMainMusic(true);
+}
+
+//from: https://www.w3schools.com/howto/howto_js_typewriter.asp 
+function typewriter()
+{
+    if(i <txt.length)
+    {
+        document.getElementById("tagLine").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typewriter, speed);
+    }
 }
 
 
