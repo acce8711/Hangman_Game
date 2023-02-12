@@ -21,7 +21,7 @@ var musicToggleSelection = true;
 //Generating theme buttons
 
 const themes = [
-    ["Idioms", "Phobias", "Latin", "Plants", "Geography", "Random"],
+    ["Idioms", "Phobias", "Latin", "Art", "Geography", "Random"],
     [0, 1, 2, 3, 4, 5]
 ];
 
