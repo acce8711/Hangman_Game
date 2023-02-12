@@ -32,7 +32,7 @@
 }
 
 .container {
-    width: 1000px;
+    min-width: 1000px;
     height: 564px;
     background-color: aqua;
     border-radius: 15px;
