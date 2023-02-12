@@ -452,7 +452,7 @@ function countUniqueLetters(str)
 {
     let unique = ""; //create new string to store unique characters in the word
     for(let i = 0; i < str.length; i++){
-        if(unique.includes(word[i])===false && word[i] != " "){
+        if(unique.includes(str[i])===false && str[i] != " "){
             unique += str[i]; //add unique letters to the new string
         }
     }
@@ -461,10 +461,4 @@ function countUniqueLetters(str)
     console.log("The number of unique letters is " + countedUnique);
     return countedUnique; //return the number of unique characters in the word
 }
-
-    $(document).click(function(){
-        console.log("rubber duck");
-        //const myModal = new bootstrap.Modal(document.getElementById('winModal'));
-        //$('.modal').modal('show');
-    })
 
