@@ -306,15 +306,6 @@ function gameOver()
     //button in game over page to reset variables and game state
 }
 
-function winState()
-{
-    console.log("you win!");
-    $('#winModal').modal('show');
-    $('#winModal').on('hidden.bs.modal', function(){
-        playGame();
-    })
-}
-
 //function hides all of the containers
 function hideContainers()
 {
