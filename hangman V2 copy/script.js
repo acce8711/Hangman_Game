@@ -405,8 +405,8 @@ function guessLetter(letter)
         {
             document.getElementById("incorrectLetter").play();
         }
-        document.getElementById("hmph").classList.remove("hmph");
         document.getElementById("hmph").classList.add("hmph");
+        setTimeout(removeHmph, 900)
         
         //document.getElementById("hmph").classList.remove("hmph");
         
@@ -418,6 +418,10 @@ function guessLetter(letter)
     
 }
 
+function removeHmph()
+{
+    document.getElementById("hmph").classList.remove("hmph");
+}
 
 function removeHeart() 
 {

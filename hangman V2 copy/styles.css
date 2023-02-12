@@ -175,7 +175,7 @@
 .hmph {
     opacity: 100%;
     animation-name: hmphAnimation;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
 }
 
 @keyframes hmphAnimation {
