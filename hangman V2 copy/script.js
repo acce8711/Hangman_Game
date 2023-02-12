@@ -33,7 +33,9 @@ $(document).ready(function(){
 
     //displaying the section that prompt the user to play
     startGame();
-    typewriter();
+    setTimeout(function(){
+        typewriter();
+    }, 1500);
 
     //checking if the music button has been clicked
     $(".musicIcon").click(function () {
