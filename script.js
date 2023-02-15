@@ -421,7 +421,7 @@ function countUniqueLetters(str)
 //function handles the bob blink's on gameOver container
 function bobBlink()
 {
-    $("#bobEyes").attr({"src":"visualRecources/bobEyesClosed2.png"});
+    $("#bobEyes").attr({"src":"visualRecources/bobEyesClosed.png"});
     setTimeout(bobDevastated, Math.random()*(800-100)+100);
 }
 
