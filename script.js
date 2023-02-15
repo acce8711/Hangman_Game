@@ -1,6 +1,7 @@
 //Global variables
 const url = `https://www.wordgamedb.com/api/v1/words/random`; //API to get words, category, and letter count
 const numThemes = 6;            //number of themes
+const maxGuesses = 5;
 var chosenTheme;                //selected theme
 var hint;                       //hint for the word
 var word;                       //selected word from API call
@@ -92,7 +93,7 @@ $(document).ready(function(){
 })
 
 
-
+//function generates buttons for the themes
 function generateThemeButtons() {
     //for loop creates 6 theme buttons and inserts them into the themeBox div in the html file
     for (let i = 0; i < numThemes; i++) {
@@ -110,6 +111,7 @@ function generateThemeButtons() {
     }
 }
 
+//function generates alphabet letter buttons
 function generateAlphabetButtons() {
     for (let i = 65; i < 91; i++) {
         const alphabetButton = document.createElement("button");
@@ -138,6 +140,7 @@ function typewriter()
     }
 }
 
+//function displays the home container
 function startGame()
 {
     //hiding all of the containers expect for the home container
@@ -145,24 +148,25 @@ function startGame()
     showContainer(".homeContainer");
 }
 
+//function displays the theme container
 function pickTheme()
 {
-    console.log("Playing game");
     hideContainers();
     showContainer(".themeContainer");
-    document.getElementById("gameOver").pause();
+    //updating the sound for when the player goes to theme container from gameOver container 
+    gameOverSound.pause();
     toggleMusic(musicToggleSelection);
 }
 
+//function displays the play container, resets variables and does API calls
 function playGame()
 {
     //resetting all variables
-    guessedLetters = [];  //storing the words that have already been done by user
+    guessedLetters = [];  
     incorrectGuesses = 0;
-    uniqueLettersWord; //number of unique letters in word to guess
-    uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
+    uniqueLettersWord; 
+    uniqueLettersGuessed = 0 ; 
     wordStatus = null;
-    //numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
     uniqueLetterCounter = 0;     
 
     if(chosenTheme == 5) //if selected theme is "Random"
@@ -249,17 +253,20 @@ function resetVisualElements(){
     }
 }
 
-//function to show game over page
+//function displays the gameOver container and game over logic
 function gameOver()
 {
+    hideContainers();
+    showContainer(".gameOverContainer");
+    //animation bob blinks
+    bobBlink();
+    //turning off main music
     toggleMusic(false);
+    //playing game over music
     gameOverSound.currentTime = 0;
     gameOverSound.play();
-    hideContainers();
+    //displaying the correct word
     $("#wordReveal").html(word);
-    showContainer(".gameOverContainer");
-    bobBlink();
-    //button in game over page to reset variables and game state
 }
 
 //function hides all of the containers
@@ -277,8 +284,7 @@ function showContainer(className)
     document.querySelector(className).style.display = "flex";
 }
 
-//function plays or pauses the main music
-
+//function plays or pauses the main music and selects the corresponding icon
 function toggleMusic(active)
 {
     if (active)
@@ -299,13 +305,16 @@ function toggleMusic(active)
     }
 }
 
+//function displays the guessed letters or underscores based on how much the user has guessed
 function guessedWord()
 {
     wordStatus = word.toUpperCase().split('').map(function (letter) {
+        //checking for spaces
         if (letter == ' ')
         {
             return  "&nbsp&nbsp&nbsp";
         }
+        //checking if the letter has been guessed
         if (guessedLetters.indexOf(letter) >= 0 )
         {
             return letter;
@@ -317,15 +326,18 @@ function guessedWord()
     wordDisplay.innerHTML = wordStatus; 
 }
 
+//function handles what happens when player clicks on an alphabet letter button
 function guessLetter(letter)
 {
     var currentLetterButton = document.getElementById(letter);
 
+    //checking if word contains the the guessed letter 
     if (word.toUpperCase().includes(letter) && !guessedLetters.includes(letter))
     {
         guessedLetters.push(letter);
         uniqueLetterCounter++;
         currentLetterButton.style.color = "var(--correctGuess)";
+        //checking if the word has been fully guessed
         if (uniqueLetterCounter >= numUniqueLetters)
         {
             winState();
@@ -335,15 +347,19 @@ function guessLetter(letter)
             correctLetterSound.play();
         }
     }
+    //if the word does not contain the guessed letter
     if(!word.toUpperCase().includes(letter))
     {
         incorrectGuesses++;
         removeHeart();
         switchExpression();
-        checkMaxGuesses();
         currentLetterButton.style.color = "var(--wrongGuess)";
-        if(incorrectGuesses != 5)
+        //checking if the user has reached the limit of letter guesses 
+        if(incorrectGuesses == maxGuesses)
         {
+            gameOver();
+        }
+        else {
             incorrectLetterSound.play();
         }
         document.getElementById("hmph").classList.add("hmph");
@@ -352,20 +368,21 @@ function guessLetter(letter)
     //disabling the button that was just clicked
     currentLetterButton.disabled = true;
     currentLetterButton.className = "alphabetLetter inactive";
-    
 }
 
-
+//function removes the hmph visual
 function removeHmph()
 {
     document.getElementById("hmph").classList.remove("hmph");
 }
 
+//function switches the heart img src 
 function removeHeart() 
 {
     document.getElementById("heart" + incorrectGuesses).src = "visualRecources/unfilledHeart.png";
 }
 
+//function switches bob's expression
 function switchExpression()
 {
     if(incorrectGuesses < 5)
@@ -374,14 +391,7 @@ function switchExpression()
     }
 }
 
-function checkMaxGuesses()
-{
-    if (incorrectGuesses == 5)
-    {
-        gameOver();
-    }
-}
-
+//function to display modal popup for when the player guesses the word correctly
 function winState()
 {
     document.getElementById("correct").play();
@@ -394,10 +404,12 @@ function winState()
 //function to count the number of unique letters in a word
 function countUniqueLetters(str)
 {
-    let unique = ""; //create new string to store unique characters in the word
+    //create new string to store unique characters in the word
+    let unique = ""; 
     for(let i = 0; i < str.length; i++){
         if(unique.includes(str[i])===false && str[i] != " "){
-            unique += str[i]; //add unique letters to the new string
+            //add unique letters to the new string
+            unique += str[i]; 
         }
     }
     console.log("The unique string is " + unique);
@@ -406,6 +418,7 @@ function countUniqueLetters(str)
     return countedUnique; //return the number of unique characters in the word
 }
 
+//function handles the bob blink's on gameOver container
 function bobBlink()
 {
     $("#bobEyes").attr({"src":"visualRecources/bobEyesClosed.png"});
