@@ -1,37 +1,50 @@
 //Global variables
 const url = `https://www.wordgamedb.com/api/v1/words/random`; //API to get words, category, and letter count
-const numThemes = 6;        //number of themes
-var chosenTheme;            //selected theme
-var hint;                   //hint for the word
-var word;                   //selected word from API call
+const numThemes = 6;            //number of themes
+var chosenTheme;                //selected theme
+var hint;                       //hint for the word
+var word;                       //selected word from API call
 var hearts = 5;                 //number of hearts
-var spaces;                 //number of spaces in a word
-var guessedLetters = [];  //storing the words that have already been done by user
+var spaces;                     //number of spaces in a word
+var guessedLetters = [];        //storing the words that have already been done by user
 var incorrectGuesses = 0;
-var uniqueLettersWord; //number of unique letters in word to guess
-var uniqueLettersGuessed = 0 ; //number of unique letters guessed correctly 
-var answer = "banana"; //word used for testing
+var uniqueLettersWord;          //number of unique letters in word to guess
+var uniqueLettersGuessed = 0 ;  //number of unique letters guessed correctly 
 var wordStatus = null;
-var numUniqueLetters = 3; //variable stores the number of unique letters that the current word has
-var uniqueLetterCounter = 0;  //counter stores the number of unique letters that have been guessed
-var musicToggleSelection = true;
+var numUniqueLetters = 3;       //variable stores the number of unique letters that the current word has
+var uniqueLetterCounter = 0;    //counter stores the number of unique letters that have been guessed
+var musicToggleSelection = true;//variable stores the current music toggle selection 
 
 //Typewriter vars
 var i = 0;
 var txt = "Help Bob write his essay!";
 var speed = 80;
 
-//Generating theme buttons
-
+//available themes 
 const themes = [
     ["Idioms", "Phobias", "Latin", "Art", "Geography", "Random"],
     [0, 1, 2, 3, 4, 5]
 ];
 
+//defining DOM elements
+var hearts = document.getElementsByClassName("heart");
+var musicIcons = document.getElementsByClassName("musicIconImg");
+var wordDisplay = document.getElementById("word");
+
+//getting DOM sounds
+var mainMusic = document.getElementById("upbeatMusic");
+var drawLine = document.getElementById("drawLine");
+var gameOverSound = document.getElementById("gameOver");
+var correctLetterSound = document.getElementById("correctLetter");
+var incorrectLetterSound = document.getElementById("incorrectLetter")
+
 $(document).ready(function(){
+    //generating the HTML buttons
+    generateThemeButtons();
+    generateAlphabetButtons();
     toggleMusic(true);
 
-    //displaying the section that prompt the user to play
+    //displaying the section that prompts the user to play
     startGame();
     setTimeout(function(){
         typewriter();
@@ -51,6 +64,7 @@ $(document).ready(function(){
         chosenTheme = selectedTheme;
         console.log(selectedTheme);
         console.log(chosenTheme);
+        drawLine.play();
         playGame();
     });
 
@@ -73,12 +87,11 @@ $(document).ready(function(){
 
     //checking for button hovers to play sound
     $("#play, #playAgain").mouseenter(function() {
-        document.getElementById("drawLine").play();
+        drawLine.play();
     });
 })
 
-generateThemeButtons();
-generateAlphabetButtons();
+
 
 function generateThemeButtons() {
     //for loop creates 6 theme buttons and inserts them into the themeBox div in the html file
@@ -114,18 +127,6 @@ function generateAlphabetButtons() {
     }
 }
 
-function generateHearts() {
-
-}
-
-function startGame()
-{
-    hideContainers();
-    showContainer(".homeContainer");
-    //playing audio
-    //playMainMusic(true);
-}
-
 //from: https://www.w3schools.com/howto/howto_js_typewriter.asp 
 function typewriter()
 {
@@ -137,6 +138,12 @@ function typewriter()
     }
 }
 
+function startGame()
+{
+    //hiding all of the containers expect for the home container
+    hideContainers();
+    showContainer(".homeContainer");
+}
 
 function pickTheme()
 {
@@ -165,7 +172,6 @@ function playGame()
     .then(data => {
         numLetters = data.numLetters;
         word = data.word;
-        //word = "hello bob";
         hint = data.category;
         $("#themeText").html(themes[0][chosenTheme]); //display selected theme on screen
         })
@@ -180,46 +186,12 @@ function playGame()
         })
    .then(()=>{
         //to include code for what happens after JSON response
-        //resetting all alphabet buttons
-        var alphabetButtons = document.getElementsByClassName("alphabetLetter")
-        for (let i = 0; i < alphabetButtons.length; i++)
-        {
-            alphabetButtons[i].disabled = false;
-            alphabetButtons[i].className = "alphabetLetter active";
-            alphabetButtons[i].style.color = "white";
-        }
-
-        //resetting all of the hearts
-        var hearts = document.getElementsByClassName("heart");
-        for (let i = 0; i < hearts.length; i++)
-        {
-            hearts[i].src = "visualRecources/filledHeart.png";
-        }
-
-        console.log(chosenTheme);
+        resetVisualElements();
         hideContainers();
         showContainer(".playContainer");
         switchExpression();
-
-        /*
-        var positionChosen = false;
-        while (!positionChosen)
-        {
-            var wordPosition = Math.floor(Math.random() * 10)
-            if (!completedWords.includes(wordPosition))
-            {
-                positionChosen = true;
-            }
-        }
-        */
-        //selecting a random word from the selected theme category
-        /*
-        word = themeWords[chosenTheme][wordPosition];
-        completedWords.push(wordPosition);
-        console.log(completedWords);
-        */
         guessedWord();
-    });
+        });
     }
     else //if the theme selected is not random
     {
@@ -250,46 +222,30 @@ function playGame()
         })
    .then(()=>{
         //to include code for what happens after JSON response
-        //resetting all alphabet buttons
-        var alphabetButtons = document.getElementsByClassName("alphabetLetter")
-        for (let i = 0; i < alphabetButtons.length; i++)
-        {
-            alphabetButtons[i].disabled = false;
-            alphabetButtons[i].className = "alphabetLetter active";
-            alphabetButtons[i].style.color = "white";
-        }
-
-        //resetting all of the hearts
-        var hearts = document.getElementsByClassName("heart");
-        for (let i = 0; i < hearts.length; i++)
-        {
-            hearts[i].src = "visualRecources/filledHeart.png";
-        }
-
-        console.log(chosenTheme);
+        resetVisualElements();
         hideContainers();
         showContainer(".playContainer");
         switchExpression();
-
-        /*
-        var positionChosen = false;
-        while (!positionChosen)
-        {
-            var wordPosition = Math.floor(Math.random() * 10)
-            if (!completedWords.includes(wordPosition))
-            {
-                positionChosen = true;
-            }
-        }
-        */
-        //selecting a random word from the selected theme category
-        /*
-        word = themeWords[chosenTheme][wordPosition];
-        completedWords.push(wordPosition);
-        console.log(completedWords);
-        */
         guessedWord();
     });
+    }
+}
+
+//function resets the alphabet letter styling and the hearts
+function resetVisualElements(){
+    //resetting all alphabet buttons
+    var alphabetButtons = document.getElementsByClassName("alphabetLetter")
+    for (let i = 0; i < alphabetButtons.length; i++)
+    {
+        alphabetButtons[i].disabled = false;
+        alphabetButtons[i].className = "alphabetLetter active";
+        alphabetButtons[i].style.color = "white";
+    }
+
+    //resetting all of the hearts
+    for (let i = 0; i < hearts.length; i++)
+    {
+        hearts[i].src = "visualRecources/filledHeart.png";
     }
 }
 
@@ -297,8 +253,8 @@ function playGame()
 function gameOver()
 {
     toggleMusic(false);
-    document.getElementById("gameOver").currentTime = 0;
-    document.getElementById("gameOver").play();
+    gameOverSound.currentTime = 0;
+    gameOverSound.play();
     hideContainers();
     $("#wordReveal").html(word);
     showContainer(".gameOverContainer");
@@ -325,11 +281,9 @@ function showContainer(className)
 
 function toggleMusic(active)
 {
-    var musicIcons = document.getElementsByClassName("musicIconImg");
-
     if (active)
     {
-        document.getElementById("upbeatMusic").play();
+        mainMusic.play();
         for (let i = 0; i < musicIcons.length; i++) {
             musicIcons[i].src = "visualRecources/musicIcon.png";
             musicIcons[i].style.height = "30px";
@@ -337,12 +291,11 @@ function toggleMusic(active)
     }
     else 
     {
-        document.getElementById("upbeatMusic").pause();
+        mainMusic.pause();
         for (let i = 0; i < musicIcons.length; i++) {
             musicIcons[i].src = "visualRecources/musicIconSlash.png";
             musicIcons[i].style.height = "31px";
         }
-        //winState();
     }
 }
 
@@ -361,11 +314,7 @@ function guessedWord()
             return " _ ";
         }
     }).join('');
-        
-    /*
-        guessedLetters.indexOf(letter) >= 0 ? letter : " _ ")).join('');*/
-    document.getElementById("word").innerHTML = wordStatus;
-    
+    wordDisplay.innerHTML = wordStatus; 
 }
 
 function guessLetter(letter)
@@ -374,10 +323,8 @@ function guessLetter(letter)
 
     if (word.toUpperCase().includes(letter) && !guessedLetters.includes(letter))
     {
-        console.log("I ", letter, " am included !");
         guessedLetters.push(letter);
         uniqueLetterCounter++;
-        console.log(uniqueLetterCounter);
         currentLetterButton.style.color = "var(--correctGuess)";
         if (uniqueLetterCounter >= numUniqueLetters)
         {
@@ -385,39 +332,29 @@ function guessLetter(letter)
         }
         else 
         {
-            document.getElementById("correctLetter").play();
+            correctLetterSound.play();
         }
-        //get word, create variable to store number of unique letters
-        //create variable for unique letter counter
-        //if letter is guessed correctly, unique letter counter is incremented
-        //if number of unique letters guessed correctly = number of unique letters in word
-        //call winState()
-        //winState() shows modal popup with message and "click anywhere to replay"
     }
     if(!word.toUpperCase().includes(letter))
     {
         incorrectGuesses++;
-        console.log(incorrectGuesses);
         removeHeart();
         switchExpression();
         checkMaxGuesses();
         currentLetterButton.style.color = "var(--wrongGuess)";
         if(incorrectGuesses != 5)
         {
-            document.getElementById("incorrectLetter").play();
+            incorrectLetterSound.play();
         }
         document.getElementById("hmph").classList.add("hmph");
-        setTimeout(removeHmph, 900)
-        
-        //document.getElementById("hmph").classList.remove("hmph");
-        
-        
+        setTimeout(removeHmph, 900)        
     }
     //disabling the button that was just clicked
     currentLetterButton.disabled = true;
     currentLetterButton.className = "alphabetLetter inactive";
     
 }
+
 
 function removeHmph()
 {
@@ -426,7 +363,6 @@ function removeHmph()
 
 function removeHeart() 
 {
-    console.log("hello noob");
     document.getElementById("heart" + incorrectGuesses).src = "visualRecources/unfilledHeart.png";
 }
 
@@ -448,7 +384,6 @@ function checkMaxGuesses()
 
 function winState()
 {
-    console.log("you win!");
     document.getElementById("correct").play();
     $('#winModal').modal('show');
     $('#winModal').on('hidden.bs.modal', function(){

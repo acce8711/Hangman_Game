@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman</title>
+    <title>Bob's Essay - Hangman Game</title>
+
+    <!--Webpage Icon-->
+    <link rel="icon" type="image/x-icon" href="/visualRecources/favicon.ico">
 
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -19,8 +22,124 @@
 </head>
 <body>
 
-    <audio id="upbeatMusic" loop="true">
-        <source src="audioRecources/be-happy-138622.mp3" type="audio/mpeg">
+    <!--div that contains all of the elements of the hangman game-->
+    <div class="hangMan">
+        <!--section that prompts the player to play-->
+        <section class="container homeContainer">
+            <div class="containerItems">
+                <!--interactive icons-->
+                <div class="icons">
+                    <button class="icon musicIcon"><img class="musicIconImg" src="visualRecources/musicIcon.png" alt="icon of a music symbol"></button>
+                </div>
+                <button id="play" onclick="pickTheme()">Play</button>
+                <h2 id="tagLine"></h2>
+            </div>
+        </section>
+
+        <!--section that allows the player to choose a theme-->
+        <section class="container themeContainer">
+            <div class="containerItems">
+                <!--interactive icons-->
+                <div class="icons">
+                    <button class="icon" onclick="startGame()"><img src="visualRecources/home.png" alt="icon of a house symbol"></button>
+                    <button class="icon musicIcon"><img class="musicIconImg" src="visualRecources/musicIcon.png" alt="icon of a music symbol"></button> 
+                </div>
+                <div class="themeSelection">
+                    <img id="themesTitle" src="visualRecources/theme.png" alt="Themes">
+                    <!--div contains the js generated theme buttons-->
+                    <div class="themeBox" id="themeBox">
+                    <!--Theme buttons are generated in script.js-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--section that contains the main hangman game play elements-->
+        <section class="container playContainer">
+            <!--images that will be modified in js-->
+            <img class="bobStage" alt="illustration of bob's expressions">
+            <img src="visualRecources/hmph.png" id="hmph" alt="onomatopoeia text of hmph">
+            <div class="containerItems">
+                <!--interactive icons-->
+                <div class="icons">
+                    <button class="icon" onclick="startGame()"><img src="visualRecources/home.png" alt="icon of a house symbol"></button>
+                    <button class="icon hintIcon"><img src="visualRecources/hint.png" alt="icon of a magnifying glass symbol"></button>
+                    <button class="icon musicIcon"><img class="musicIconImg" src="visualRecources/musicIcon.png" alt="icon of a music symbol"></button> 
+                </div>
+                <!--div contains the selected theme-->
+                <div class="themeSelected">
+                    <p id="themeText"></p>
+                </div>
+                <!--div contains the guessed text. Updates if the user selects the correct letter-->
+                <div class="wordText">
+                    <p id="word">The guessed word goes here</p>
+                </div>
+                <!--div contains the alphabet letter buttons-->
+                <div class="alphabet">
+                    <div class="alphabetItems"  id="alphabetItems">
+                        <!--alphabet buttons are generated in script.js-->
+                    </div>
+                </div>
+                <!--div contains the hearts. Img source and alt gets updated each time player guesses wrong letter-->
+                <div class="hearts">
+                    <span><img src="visualRecources/filledHeart.png" id="heart1" class="heart" ></span>
+                    <span><img src="visualRecources/filledHeart.png" id="heart2" class="heart" ></span>
+                    <span><img src="visualRecources/filledHeart.png" id="heart3" class="heart" ></span>
+                    <span><img src="visualRecources/filledHeart.png" id="heart4" class="heart" ></span>
+                    <span><img src="visualRecources/filledHeart.png" id="heart5" class="heart" ></span>
+                </div>
+            </div>
+        </section>
+
+        <!--section that contains the game over elements-->
+        <section class="container gameOverContainer">
+            <div class="containerItems">
+                <img id="bobEyes" src="visualRecources/bobEyesOpen.png" alt="">
+                <div class="gameOver">
+                    <h4>Answer:  
+                        <span id="wordReveal">
+                            <!--get word from API call or JSON file-->
+                        </span>.
+                    </h4>
+                    <button id="playAgain" onclick="pickTheme()">Play Again?</a>
+                </div>
+            </div>
+        </section>
+
+        <!--hint modal popup bootstrap-->
+        <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                            <h2>Hint:</h2>
+                            <h4 id="hint">
+                                Hmm...something something
+                                "<span id="hintText">
+                                <!--category given from API-->
+                                </span>"
+                            </h4>
+                            <p id="modalExitText">(Click outside the box to continue)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--win state Modal-->
+        <div class="modal fade" id="winModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h2>Correct!</h2>
+                        <p id="modalExitText">(Click outside the box to continue)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Audio tags that contain the sfx and music used throughout the game-->
+    <audio id="upbeatMusic" loop="true" autoplay="true">
+        <source src="audioRecources/upbeatMusic.mp3" type="audio/mpeg">
     </audio>
 
     <audio id="drawLine">
@@ -46,115 +165,6 @@
     <audio id="gameOver">
         <source src="audioRecources/ominousBob2.mp3" type="audio/mpeg">
     </audio>
-
-    <div class="hangMan">
-        <!--section that prompts the player to play-->
-        <section class="container homeContainer">
-            <div class="containerItems">
-                <div class="icons">
-                    <button class="icon musicIcon"><img class="musicIconImg" src="visualRecources/musicIcon.png" alt="icon of a music symbol"></button>
-                </div>
-                <!--<h1>Title</h1>-->
-                <button id="play" onclick="pickTheme()">Play</button>
-                <h2 id="tagLine"></h2>
-            </div>
-        </section>
-
-        <!--section that allows the player to choose a theme-->
-        <section class="container themeContainer">
-            <div class="containerItems">
-                <div class="icons">
-                    <button class="icon" onclick="startGame()"><img src="visualRecources/home.png" alt="icon of a house symbol"></button>
-                    <button class="icon musicIcon"><img class="musicIconImg" src="visualRecources/musicIcon.png" alt="icon of a music symbol"></button> 
-                </div>
-                <div class="themeSelection">
-                    <img id="themesTitle" src="visualRecources/theme.png" alt="Themes">
-                <div class="themeBox" id="themeBox">
-                    <!--Theme buttons are generated in script.js-->
-                </div>
-                </div>
-            </div>
-        </section>
-
-        <!--section that contains the main hangman play elements-->
-        <section class="container playContainer">
-            <img class="bobStage">
-            <img src="visualRecources/hmph.png" id="hmph">
-            <div class="containerItems">
-                <div class="icons">
-                    <button class="icon" onclick="startGame()"><img src="visualRecources/home.png" alt="icon of a house symbol"></button>
-                    <button class="icon hintIcon"><img src="visualRecources/hint.png" alt="icon of a magnifying glass symbol"></button>
-                    <button class="icon musicIcon"><img class="musicIconImg" src="visualRecources/musicIcon.png" alt="icon of a music symbol"></button> 
-                </div>
-                
-
-                <div class="themeSelected">
-                    <p id="themeText">
-                    </p>
-                </div>
-                
-
-                <div class="wordText">
-                    <p id="word">The guessed word goes here</p>
-                </div>
-                <div class="alphabet">
-                    <div class="alphabetItems"  id="alphabetItems">
-                        <!--alphabet buttons are generated in script.js-->
-                    </div>
-                </div>
-                <div class="hearts">
-                    <span><img src="visualRecources/filledHeart.png" id="heart1" class="heart" ></span>
-                    <span><img src="visualRecources/filledHeart.png" id="heart2" class="heart" ></span>
-                    <span><img src="visualRecources/filledHeart.png" id="heart3" class="heart" ></span>
-                    <span><img src="visualRecources/filledHeart.png" id="heart4" class="heart" ></span>
-                    <span><img src="visualRecources/filledHeart.png" id="heart5" class="heart" ></span>
-                </div>
-            </div>
-        </section>
-
-        <section class="container gameOverContainer">
-            <div class="containerItems">
-                <img id="bobEyes" src="visualRecources/bobEyesOpen.png" alt="">
-                <div class="gameOver">
-                    <h4>Answer:  
-                        <span id="wordReveal">
-                            <!--get word from API call or JSON file-->
-                        </span>.
-                    </h4>
-                    <button id="playAgain" onclick="pickTheme()">Play Again?</a>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!--hint modal popup bootstrap-->
-    <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                        <h2>Hint:</h2>
-                        <h4 id="hint">
-                            Hmm...something something
-                            "<span id="hintText">
-                            <!--category given from API-->
-                            </span>"
-                        </h4>
-                        <p id="modalExitText">(Click outside the box to continue)</p>
-                </div>
-            </div>
-        </div>
-    </div>
-<!--win Modal-->
-   <div class="modal fade" id="winModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h2>Correct!</h2>
-                    <p id="modalExitText">(Click outside the box to continue)</p>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <!--linking the jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -162,5 +172,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <!--linking the js file-->
     <script src="script.js"></script>
+
 </body>
 </html>

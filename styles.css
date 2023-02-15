@@ -9,21 +9,13 @@
 }
 
 /*creating css colour variables which contain colour codes*/
-/*useful for when switching between light mode and dark mode*/
-/*learned about css variables from w3schools https://www.w3schools.com/css/css3_variables.asp*/
 :root {
-  --navBar: #fc4f1b;
   --white: white;
-  --offwhite: #f2f2f2;
-  --red: #cb3b24;
-  --offblack: #222831;
-  --grey: #393e46;
-  --iconHover: #e7e7e7;
+  --red: #b92626;
+  --greenChalk: #9fb4a1;
   --wrongGuess: #da8181;
   --correctGuess: #99d880;
 }
-
-
 
 .hangMan {
     height: 100vh;
@@ -31,21 +23,17 @@
     align-items: center;
 }
 
+/*---------------------General Styling---------------------*/
+
+/*Styling the general containers*/
 .container {
     max-width: 1000px;
     height: 564px;
-    background-color: aqua;
     border-radius: 15px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.homeContainer {
-    background: url(visualRecources/homeScreen2.jpg);
-    background-size: cover;
-    position: relative;
 }
 
 .containerItems {
@@ -77,6 +65,15 @@
     opacity: 50%;
 }
 
+/*---------------------Home Container Styling---------------------*/
+
+.homeContainer {
+    background: url(visualRecources/homeScreen2.jpg);
+    background-size: cover;
+    position: relative;
+}
+
+/*Play button styling*/
 #play {
     position: absolute;
     top: 300px;
@@ -86,9 +83,10 @@
     font-size: 64px;
     background: transparent;
     border: none;
-    color: rgb(230, 230, 230);
+    color: var(--white);
 }
 
+/*underline animation styling*/
 #play:after, #playAgain:after {
     content: '';
     height: 10px;
@@ -100,6 +98,7 @@
     transition: .2s ease-in-out;
 }
 
+/*underline animation styling*/
 #play:hover::after, #playAgain:hover::after {
     content:"";
     height: 10px;
@@ -116,6 +115,8 @@
     bottom: 0;
     right: 100px;
 }
+
+/*---------------------Theme Container Styling---------------------*/
 
 .themeContainer {
     background: url(visualRecources/chalkboard.jpg);
@@ -144,13 +145,15 @@
 .themeButton {
     border: none;
     background-color: transparent;
-    color: white;
+    color: var(--white);
     font-size: 24px;
 }
 
 .themeButton:hover {
     opacity: 50%;
 }
+
+/*---------------------Play Container Styling---------------------*/
 
 .playContainer {
     background: url(visualRecources/playPage.jpg);
@@ -178,6 +181,7 @@
     animation-duration: 1.5s;
 }
 
+/*animation for hmph effect*/
 @keyframes hmphAnimation {
     0% {opacity: 0%;}
     50% {opacity: 100%;}
@@ -190,7 +194,7 @@
 }
 
 #themeText{
-    color: rgb(159, 180, 161);
+    color: var(--greenChalk);
 }
 
 .wordText, .themeSelected {
@@ -206,7 +210,7 @@
 }
 
 #word {
-    color: #e7e7e7;
+    color: var(--white);
     font-size: 24px;
     text-align: center;
 }
@@ -221,10 +225,6 @@
 .alphabetItems {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    /*
-    grid-auto-flow: dense;
-    direction: rtl;
-    */
     gap: 5px;
 }
 
@@ -232,7 +232,7 @@
     aspect-ratio: 1/1;
     border: none;
     background-color: transparent;
-    color: white;
+    color: var(--white);
     font-size: 24px;
 }
 
@@ -258,6 +258,7 @@
     height: 35px;
 }
 
+/*---------------------Game Over Container Styling---------------------*/
 
 .gameOverContainer  {
     background: url(visualRecources/gameOver.jpg);
@@ -284,7 +285,7 @@
     font-size: 48px;
     background: transparent;
     border: none;
-    color: rgb(0, 0, 0);
+    color:var(--red);
 }
 
 #playAgain:after {
@@ -298,7 +299,8 @@
 }
 
 
-/*Modal*/
+/*---------------------Modal Styling---------------------*/
+
 .modal-content {
     background: url(visualRecources/linedPaper.jpg);
     background-size: cover;
