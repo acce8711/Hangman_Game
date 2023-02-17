@@ -63,8 +63,8 @@ $(document).ready(function(){
         //getting the value of the clicked theme button
         var selectedTheme = $(this).val();
         chosenTheme = selectedTheme;
-        console.log(selectedTheme);
-        console.log(chosenTheme);
+        //console.log(selectedTheme);
+        //console.log(chosenTheme);
         drawLine.play();
         playGame();
     });
@@ -72,8 +72,8 @@ $(document).ready(function(){
     //jquery will monitor if a theme button has been clicked
     $(".hintIcon").click(function () {
         $('#hintModal').modal('toggle');
-        console.log("Hint modal activated");
-        console.log(hint);
+        //console.log("Hint modal activated");
+        //console.log(hint);
         $("#hintText").html(hint);
     });
 
@@ -81,7 +81,7 @@ $(document).ready(function(){
     $(".alphabetLetter").click(function () {
         //getting the value of the clicked alphabet button
         var selectedLetter = $(this).val();
-        console.log(selectedLetter);
+        //console.log(selectedLetter);
         guessLetter(selectedLetter);
         guessedWord();
     });
@@ -180,16 +180,16 @@ function playGame()
         $("#themeText").html(themes[0][chosenTheme]); //display selected theme on screen
         })
     .then(() => {
-        console.log(word);
-        console.log("The number of letters in " + word + " is " + numLetters);
-        console.log("The hint is " + hint);
+        //console.log(word);
+        //console.log("The number of letters in " + word + " is " + numLetters);
+        //console.log("The hint is " + hint);
         })
     .then(()=>{
         numUniqueLetters = countUniqueLetters(word);
-        console.log("Unique letters ", numUniqueLetters);
+        //console.log("Unique letters ", numUniqueLetters);
         })
    .then(()=>{
-        //to include code for what happens after JSON response
+        //code for what happens after JSON response
         resetVisualElements();
         hideContainers();
         showContainer(".playContainer");
@@ -203,29 +203,29 @@ function playGame()
     .then(res => res.json())
     .then(data => {
         let selectedThemeVal = themes[0][chosenTheme]; //get string value of chosen them
-        console.log(selectedThemeVal);
+        //console.log(selectedThemeVal);
         let themeSetSize = data[""+selectedThemeVal+""].length; //get the number of word entries in the chosen theme set
-        console.log("The number of entries in " + selectedThemeVal + " is " + themeSetSize);
+        //console.log("The number of entries in " + selectedThemeVal + " is " + themeSetSize);
         randomNum = Math.floor(Math.random()*themeSetSize); //randomise the word selected from the theme set
-        console.log(randomNum);
+        //console.log(randomNum);
         hint = data[""+selectedThemeVal+""][randomNum].hint; //get the hint from the selected word
-        console.log("The hint is " + hint);
+        //console.log("The hint is " + hint);
         word = data[""+selectedThemeVal+""][randomNum].word; //get selected word
-        console.log("The word is " + word);
+        //console.log("The word is " + word);
         numLetters = word.length; //get length of word
         $("#themeText").html(themes[0][chosenTheme]); //display theme selected on screen
         })
     .then(() => {
-        console.log(word);
-        console.log("The number of letters in " + word + " is " + numLetters);
-        console.log(hint);
+        //console.log(word);
+        //console.log("The number of letters in " + word + " is " + numLetters);
+        //console.log(hint);
         })
     .then(()=>{
         numUniqueLetters = countUniqueLetters(word.toUpperCase());
-        console.log("Unique letters ", numUniqueLetters);
+        //console.log("Unique letters ", numUniqueLetters);
         })
    .then(()=>{
-        //to include code for what happens after JSON response
+        //code for what happens after JSON response
         resetVisualElements();
         hideContainers();
         showContainer(".playContainer");
@@ -237,7 +237,7 @@ function playGame()
 
 //function resets the alphabet letter styling and the hearts
 function resetVisualElements(){
-    //resetting all alphabet buttons
+    // resetting all alphabet buttons
     var alphabetButtons = document.getElementsByClassName("alphabetLetter")
     for (let i = 0; i < alphabetButtons.length; i++)
     {
@@ -246,14 +246,14 @@ function resetVisualElements(){
         alphabetButtons[i].style.color = "white";
     }
 
-    //resetting all of the hearts
+    // resetting all of the hearts
     for (let i = 0; i < hearts.length; i++)
     {
         hearts[i].src = "visualRecources/filledHeart.png";
     }
 }
 
-//function displays the gameOver container and game over logic
+// function displays the gameOver container and game over logic
 function gameOver()
 {
     hideContainers();
@@ -412,9 +412,9 @@ function countUniqueLetters(str)
             unique += str[i]; 
         }
     }
-    console.log("The unique string is " + unique);
+    //console.log("The unique string is " + unique);
     let countedUnique = unique.length; //count the string length of the new string
-    console.log("The number of unique letters is " + countedUnique);
+    //console.log("The number of unique letters is " + countedUnique);
     return countedUnique; //return the number of unique characters in the word
 }
 
@@ -424,7 +424,7 @@ function bobBlink()
     $("#bobEyes").attr({"src":"visualRecources/bobEyesClosed.png"});
     setTimeout(bobDevastated, Math.random()*(800-100)+100);
 }
-
+//function shows bob's open eyes then calls bobBlink() to show closed eyes
 function bobDevastated()
 {
     $("#bobEyes").attr({"src":"visualRecources/bobEyesOpen.png"});
