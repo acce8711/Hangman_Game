@@ -68,7 +68,7 @@
 /*---------------------Home Container Styling---------------------*/
 
 .homeContainer {
-    background: url(visualRecources/homeScreen2.jpg);
+    background: url(visualResources/homeScreen2.jpg);
     background-size: cover;
     position: relative;
 }
@@ -91,7 +91,7 @@
     content: '';
     height: 10px;
     width: 0%;
-    background: url(visualRecources/underline.png);
+    background: url(visualResources/underline.png);
     background-size: cover;
     border-radius: 10px;
     display: block;
@@ -103,7 +103,7 @@
     content:"";
     height: 10px;
     width: 100%;
-    background: url(visualRecources/underline.png);
+    background: url(visualResources/underline.png);
     background-size: cover;
     border-radius: 10px;
     display: block;
@@ -119,7 +119,7 @@
 /*---------------------Theme Container Styling---------------------*/
 
 .themeContainer {
-    background: url(visualRecources/chalkboard.jpg);
+    background: url(visualResources/chalkboard.jpg);
     background-size: cover;
 }
 
@@ -156,7 +156,7 @@
 /*---------------------Play Container Styling---------------------*/
 
 .playContainer {
-    background: url(visualRecources/playPage.jpg);
+    background: url(visualResources/playPage.jpg);
     background-size: cover;
     position: relative;
 }
@@ -261,7 +261,7 @@
 /*---------------------Game Over Container Styling---------------------*/
 
 .gameOverContainer  {
-    background: url(visualRecources/gameOver.jpg);
+    background: url(visualResources/gameOver.jpg);
     background-size: cover;
 }
 
@@ -289,12 +289,12 @@
 }
 
 #playAgain:after {
-    background: url(visualRecources/underlineDark.png);
+    background: url(visualResources/underlineDark.png);
     background-size: cover;
 }
 
 #playAgain:hover::after {
-    background: url(visualRecources/underlineDark.png);
+    background: url(visualResources/underlineDark.png);
     background-size: cover;
 }
 
@@ -302,7 +302,7 @@
 /*---------------------Modal Styling---------------------*/
 
 .modal-content {
-    background: url(visualRecources/linedPaper.jpg);
+    background: url(visualResources/linedPaper.jpg);
     background-size: cover;
     height: 300px;
     border-radius: 0px;

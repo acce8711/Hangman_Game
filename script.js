@@ -249,7 +249,7 @@ function resetVisualElements(){
     // resetting all of the hearts
     for (let i = 0; i < hearts.length; i++)
     {
-        hearts[i].src = "visualRecources/filledHeart.png";
+        hearts[i].src = "visualResources/filledHeart.png";
     }
 }
 
@@ -291,7 +291,7 @@ function toggleMusic(active)
     {
         mainMusic.play();
         for (let i = 0; i < musicIcons.length; i++) {
-            musicIcons[i].src = "visualRecources/musicIcon.png";
+            musicIcons[i].src = "visualResources/musicIcon.png";
             musicIcons[i].style.height = "30px";
         }
     }
@@ -299,7 +299,7 @@ function toggleMusic(active)
     {
         mainMusic.pause();
         for (let i = 0; i < musicIcons.length; i++) {
-            musicIcons[i].src = "visualRecources/musicIconSlash.png";
+            musicIcons[i].src = "visualResources/musicIconSlash.png";
             musicIcons[i].style.height = "31px";
         }
     }
@@ -379,7 +379,7 @@ function removeHmph()
 //function switches the heart img src 
 function removeHeart() 
 {
-    document.getElementById("heart" + incorrectGuesses).src = "visualRecources/unfilledHeart.png";
+    document.getElementById("heart" + incorrectGuesses).src = "visualResources/unfilledHeart.png";
 }
 
 //function switches bob's expression
@@ -387,7 +387,7 @@ function switchExpression()
 {
     if(incorrectGuesses < 5)
     {
-        document.getElementsByClassName("bobStage")[0].src = "visualRecources/bobStage"+(incorrectGuesses+1)+".png";
+        document.getElementsByClassName("bobStage")[0].src = "visualResources/bobStage"+(incorrectGuesses+1)+".png";
     }
 }
 
@@ -421,12 +421,12 @@ function countUniqueLetters(str)
 //function handles the bob blink's on gameOver container
 function bobBlink()
 {
-    $("#bobEyes").attr({"src":"visualRecources/bobEyesClosed.png"});
+    $("#bobEyes").attr({"src":"visualResources/bobEyesClosed.png"});
     setTimeout(bobDevastated, Math.random()*(800-100)+100);
 }
 //function shows bob's open eyes then calls bobBlink() to show closed eyes
 function bobDevastated()
 {
-    $("#bobEyes").attr({"src":"visualRecources/bobEyesOpen.png"});
+    $("#bobEyes").attr({"src":"visualResources/bobEyesOpen.png"});
     setTimeout(bobBlink,Math.random()*(2000-100)+100);
 }
