@@ -10,7 +10,7 @@
 
 /*creating css colour variables which contain colour codes*/
 :root {
-  --white: rgb(160, 78, 78);
+  --white: #ffffff;
   --red: #b92626;
   --greenChalk: #9fb4a1;
   --wrongGuess: #da8181;
