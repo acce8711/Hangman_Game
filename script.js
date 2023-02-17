@@ -308,6 +308,7 @@ function toggleMusic(active)
 //function displays the guessed letters or underscores based on how much the user has guessed
 function guessedWord()
 {
+    //word status word split was referenced from https://www.youtube.com/watch?v=dgvyE1sJS3Y 
     wordStatus = word.toUpperCase().split('').map(function (letter) {
         //checking for spaces
         if (letter == ' ')

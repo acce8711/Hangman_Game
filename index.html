@@ -45,7 +45,7 @@
                     <button class="icon musicIcon"><img class="musicIconImg" src="visualResources/musicIcon.png" alt="icon of a music symbol"></button> 
                 </div>
                 <div class="themeSelection">
-                    <img id="themesTitle" src="visualResources/theme.png" alt="Themes">
+                    <img id="themesTitle" src="visualResources/theme.png" alt="Themes title">
                     <!--div contains the js generated theme buttons-->
                     <div class="themeBox" id="themeBox">
                     <!--Theme buttons are generated in script.js-->
@@ -82,11 +82,11 @@
                 </div>
                 <!--div contains the hearts. Img source and alt gets updated each time player guesses wrong letter-->
                 <div class="hearts">
-                    <span><img src="visualResources/filledHeart.png" id="heart1" class="heart" ></span>
-                    <span><img src="visualResources/filledHeart.png" id="heart2" class="heart" ></span>
-                    <span><img src="visualResources/filledHeart.png" id="heart3" class="heart" ></span>
-                    <span><img src="visualResources/filledHeart.png" id="heart4" class="heart" ></span>
-                    <span><img src="visualResources/filledHeart.png" id="heart5" class="heart" ></span>
+                    <span><img src="visualResources/filledHeart.png" id="heart1" class="heart" alt="image of a heart"></span>
+                    <span><img src="visualResources/filledHeart.png" id="heart2" class="heart" alt="image of a heart"></span>
+                    <span><img src="visualResources/filledHeart.png" id="heart3" class="heart" alt="image of a heart"></span>
+                    <span><img src="visualResources/filledHeart.png" id="heart4" class="heart" alt="image of a heart"></span>
+                    <span><img src="visualResources/filledHeart.png" id="heart5" class="heart" alt="image of a heart"></span>
                 </div>
             </div>
         </section>
@@ -94,8 +94,9 @@
         <!--section that contains the game over elements-->
         <section class="container gameOverContainer">
             <div class="containerItems">
-                <img id="bobEyes" src="visualResources/bobEyesOpen.png" alt="">
+                <img id="bobEyes" src="visualResources/bobEyesOpen.png" alt="image of Bob's eyes">
                 <div class="gameOver">
+                    <img id="looseText" src="visualResources/GameOverText.png" alt="You loose text image">
                     <h4>Answer:  
                         <span id="wordReveal">
                             <!--get word from API call or JSON file-->

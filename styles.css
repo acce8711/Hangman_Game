@@ -278,7 +278,12 @@
 }
 
 .gameOver {
-    margin-top: 350px;
+    margin-top: 270px;
+}
+
+#looseText {
+    height: 60px;
+    margin: 20px;
 }
 
 #playAgain {
