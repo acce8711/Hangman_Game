@@ -188,7 +188,7 @@ function playGame()
         numUniqueLetters = countUniqueLetters(word);
         //console.log("Unique letters ", numUniqueLetters);
         })
-   .then(()=>{
+    .then(()=>{
         //code for what happens after JSON response
         resetVisualElements();
         hideContainers();
