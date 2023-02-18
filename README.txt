@@ -1,0 +1,1 @@
+For the best experience, please tets/play the game with you device's sound on :)
